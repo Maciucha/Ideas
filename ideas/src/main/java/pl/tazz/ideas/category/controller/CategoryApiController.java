@@ -1,6 +1,7 @@
 package pl.tazz.ideas.category.controller;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -12,16 +13,13 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/categories")
+@RequiredArgsConstructor
 public class CategoryApiController {
 
     private final CategoryService categoriesService;
 
-    public CategoryApiController(CategoryService categoriesService) {
-        this.categoriesService = categoriesService;
-    }
-
     @GetMapping
-    Page<Category> getCategories(Pageable  pageable) {
+    Page<Category> getCategories(Pageable pageable) {
         return categoriesService.getCategories(pageable);
     }
 
