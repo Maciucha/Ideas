@@ -37,7 +37,13 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title" th:text=" #{text.found} + ': ' +${categoriesPage.totalElements}+ ' ' + #{menu.categories} + ' ' +${#strings.isEmpty(search) ? '' : ', szukano: '+search}+']'">Zarządzanie kategoriami</h3>
+
+                                <h3 class="card-title">
+                                    <span th:text="#{text.found} + ': ' + ${categoriesPage.totalElements} + ' ' +  #{text.categories}"></span>
+                                    <span th:if="${!#strings.isEmpty(search)}">
+        , <span th:text="#{message.searched} + ': (' + ${search} + ')'"></span>
+    </span>
+                                </h3>
 
                                 <div class="card-tools">
                                     <form>
