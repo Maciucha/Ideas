@@ -6,7 +6,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.AbstractController;
 import pl.tazz.ideas.IdeasConfiguration;
 import pl.tazz.ideas.category.service.CategoryService;
 import pl.tazz.ideas.common.controller.ContorllerUtils;
@@ -76,7 +75,7 @@ public class QuestionViewController extends IdeasCommonViewController {
     }
 
     @GetMapping("unanswered")
-    public String hotUnanswered(@RequestParam(name = "page", defaultValue = "1") Integer page, Model model) {
+    public String unansweredView(@RequestParam(name = "page", defaultValue = "1") Integer page, Model model) {
 
         PageRequest pageRequest = PageRequest.of(page - 1, ideasConfiguration.getPagingPageSize());
         Page<Question> questionsPage = questionsService.findUnanswered(pageRequest);
