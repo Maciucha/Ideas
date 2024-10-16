@@ -1,23 +1,19 @@
 package pl.tazz.ideas.question.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.tazz.ideas.question.domain.model.Answer;
-import pl.tazz.ideas.question.domain.model.Question;
 import pl.tazz.ideas.question.service.AnswerService;
-import pl.tazz.ideas.question.service.QuestionService;
 
 import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/questions/{question-id}/answers")
+@RequiredArgsConstructor
 public class AnswerController {
     private final AnswerService answerService;
-
-    public AnswerController(AnswerService answerService) {
-        this.answerService = answerService;
-    }
 
     @GetMapping
     List<Answer> getAnswers(@PathVariable("question-id") UUID questionID) {

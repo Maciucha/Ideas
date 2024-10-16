@@ -1,5 +1,6 @@
 package pl.tazz.ideas.question.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.tazz.ideas.question.domain.model.Answer;
@@ -11,16 +12,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class AnswerService {
 
     private final AnswerRepository answerRepository;
     private final QuestionRepository questionRepository;
-
-    public AnswerService(AnswerRepository answerRepository, QuestionRepository questionRepository) {
-        this.answerRepository = answerRepository;
-        this.questionRepository = questionRepository;
-
-    }
 
     @Transactional(readOnly = true)
     public List<Answer> getAnswers(UUID questionId) {

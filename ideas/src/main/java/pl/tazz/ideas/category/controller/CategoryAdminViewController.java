@@ -1,6 +1,7 @@
 package pl.tazz.ideas.category.controller;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,13 +20,11 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin/categories")
+@RequiredArgsConstructor
 public class CategoryAdminViewController {
 
     private final CategoryService categoryService;
 
-    public CategoryAdminViewController(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
 
     @GetMapping
     public String indexView(
