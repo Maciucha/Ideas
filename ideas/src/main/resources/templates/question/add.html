@@ -1,16 +1,66 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="#{title.add}">Form to add new question</title>
-</head>
+<head th:replace="template :: head(title = '100 ideas - Ask')"><title>Ask</title></head>
 <body>
-<h1>New question</h1>
-    <form th:object="${question}" method="post" action="/questions">
-        Name: <input type="text" th:field="*{name}" /> <br />
+<th:block th:replace="template :: header"/>
 
-        <input type="submit" value="Add question" />
-    </form>
+
+<section class="main-content920">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="ask-question-input-part032">
+                    <h4 th:text="#{menu.ask_question}">Zadaj pytanie</h4>
+                    <hr>
+                    <form>
+                        <div class="form-group">
+                            <label for="username" th:text="#{menu.username}">Użytkownik*</label>
+                            <input type="text" name="fname" class="form-control" id="username" th:placeholder="#{menu.placeholder_name}">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-Mail*</label>
+                            <input type="email" name="email" class="form-control" id="email" th:placeholder="#{menu.placeholder_email}">
+                        </div>
+                        <div class="form-group">
+                            <label for="question-title" th:text="#{menu.question_title}">Tytuł pytania*</label>
+                            <input type="text" name="question-title" class="form-control" id="question-title" th:placeholder="#{menu.placeholder_question_title}">
+                        </div>
+                        <div class="form-group">
+                            <label for="category" th:text="#{menu.category}">Kategoria*</label>
+                            <select name="category" class="form-control" id="category">
+                                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="attachment" th:text="#{menu.attactment}">Załącznik*</label>
+                            <input type="file" name="ffile" class="form-control" id="attachment">
+                        </div>
+                        <div class="form-group">
+                            <span th:text="#{menu.choose}">Wybierz*</span>
+                            <textarea id="txtEditor" class="form-control"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" th:text="#{menu.publish_your_question}">Opublikuj swoje pytanie</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--    footer -->
+<th:block th:replace="template :: footer"/>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/editor.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#txtEditor").Editor();
+    });
+</script>
+
 
 </body>
+
 </html>

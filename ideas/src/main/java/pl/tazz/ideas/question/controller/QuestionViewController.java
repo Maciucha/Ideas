@@ -51,6 +51,8 @@ public class QuestionViewController extends IdeasCommonViewController {
     public String addViev(Model model) {
         model.addAttribute("question", new Question());
 
+        addGlobalAttributes(model);
+
         return "question/add";
     }
 
