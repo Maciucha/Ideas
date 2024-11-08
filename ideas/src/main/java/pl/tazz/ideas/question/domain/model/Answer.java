@@ -21,6 +21,7 @@ public class Answer {
     private UUID id;
 
     private String name;
+    private String content;
 
     @ManyToOne
     private Question question;

@@ -29,7 +29,7 @@ public class AnswerService {
     }
 
     @Transactional
-    public Answer createAswer(UUID questionId, Answer answerRequest) {
+    public Answer createAnswer(UUID questionId, Answer answerRequest) {
         Answer answer = new Answer();
         answer.setName(answerRequest.getName());
 
@@ -46,6 +46,7 @@ public class AnswerService {
     public Answer updateAnswer(UUID answerId, Answer answerRequest) {
         Answer answer = answerRepository.getReferenceById(answerId);
         answer.setName(answerRequest.getName());
+
 
         return answerRepository.save(answer);
     }

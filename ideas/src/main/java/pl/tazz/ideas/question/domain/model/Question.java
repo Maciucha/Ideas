@@ -19,6 +19,10 @@ public class Question {
     private UUID id;
 
     private String name;
+    private String username;
+    private String email;
+    private String title;
+    private String content;
 
     @ManyToOne
     private Category category;
@@ -35,15 +39,13 @@ public class Question {
         this.name = name;
     }
 
-
-    public Question addAnswer(Answer answer) {
+    public void addAnswer(Answer answer) {
         if (answers == null) {
             answers = new LinkedHashSet<>();
         }
 
-    answer.setQuestion(this);
-    answers.add(answer);
+        answer.setQuestion(this);
+        answers.add(answer);
 
-        return this;
     }
 }

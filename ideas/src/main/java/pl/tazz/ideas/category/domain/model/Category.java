@@ -20,6 +20,7 @@ public class Category {
     @Id
     private UUID id;
 
+
     @NotBlank(message = "{ideas.validation.name.NotBlank.message}")
     @Size(min = 3, max = 255)
     private String name;

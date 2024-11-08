@@ -28,7 +28,7 @@ public class AnswerController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     Answer createAnswer(@PathVariable("question-id") UUID questionID, @RequestBody Answer answer) {
-        return answerService.createAswer(questionID, answer);
+        return answerService.createAnswer(questionID, answer);
     }
 
 

@@ -12,6 +12,6 @@ public abstract class IdeasCommonViewController {
     protected CategoryService categoryService;
 
     protected void addGlobalAttributes(Model model) {
-        model.addAttribute("categories", categoryService.getCategories(PageRequest.of(0, 10, Sort.by("name").ascending())));
+        model.addAttribute("categories", categoryService.getCategories(PageRequest.of(0, 30, Sort.by("name").ascending())));
     }
 }

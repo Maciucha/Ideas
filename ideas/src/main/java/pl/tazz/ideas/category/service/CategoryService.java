@@ -1,5 +1,7 @@
 package pl.tazz.ideas.category.service;
 
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -10,13 +12,10 @@ import pl.tazz.ideas.category.domain.repository.CategoryRepository;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
-
-    public CategoryService(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
 
     @Transactional(readOnly = true)
     public Page<Category> getCategories(Pageable pageable) {

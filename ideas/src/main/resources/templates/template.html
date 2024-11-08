@@ -8,7 +8,8 @@
 
 
     <!-- Bootstrap core CSS -->
-        <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
 
 
     <meta name="theme-color" content="#7952b3">
@@ -34,14 +35,18 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="/css/blog.css" rel="stylesheet">
-    <link href="/css/custom.css" rel="stylesheet">
     <link href="/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <link href="/css/editor.css" rel="stylesheet" type="text/css">
     <link href="/css/animate.css" rel="stylesheet" type="text/css">
     <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="/css/responsive.css" rel="stylesheet" type="text/css"> </head>
+    <link href="/css/responsive.css" rel="stylesheet" type="text/css">
+    <link href="/css/custom.css" rel="stylesheet">
+    <script src="/js/jquery-2.2.4.min.js"></script>
+    <script src="/js/editor.js"></script>
+
 </head>
+
 <body>
 
 <div th:fragment="header" class="container">
@@ -92,11 +97,16 @@
             </div>
         </div>
     </header>
-
+    <p></p>
+    <p></p>
     <div class="nav-scroller py-1 mb-2">
-        <nav class="nav d-flex justify-content-between">
-            <a th:each="category : ${categories}"  th:text="${category.name}" class="p-2 link-secondary" th:href="@{'/categories/'+${category.id}}" >Category</a>
+        <nav class="navCategory">
+            <a th:each="category : ${categories}" th:text="${category.name}"
+               class="p-2 link-secondary"
+               th:href="@{'/categories/'+${category.id}}">
+            </a>
         </nav>
+
     </div>
 </div>
 

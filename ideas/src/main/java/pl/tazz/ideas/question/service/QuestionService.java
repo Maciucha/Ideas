@@ -27,7 +27,7 @@ public class QuestionService {
 
     @Transactional(readOnly = true)
     public Question getQuestion(UUID id) {
-        return questionRepository.getById(id);
+        return questionRepository.getReferenceById(id);
     }
 
     @Transactional

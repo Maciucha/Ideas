@@ -88,4 +88,15 @@ public class QuestionViewController extends IdeasCommonViewController {
 
         return "question/index";
     }
+
+    @PostMapping("/add")
+    public String addQuestion(@RequestParam String username, @RequestParam String email, @RequestParam String title, @RequestParam String content) {
+        Question question = new Question();
+        question.setUsername(username);
+        question.setEmail(email);
+        question.setTitle(title);
+        question.setContent(content);
+        questionsService.createQuestion(question);
+        return "redirect:/questions";
+    }
 }

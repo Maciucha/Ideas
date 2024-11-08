@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="template :: head(title = '100 ideas - Ask')"><title>Ask</title></head>
+<head th:replace="~{template :: head(title = '100 ideas - Ask')}"><title>Ask</title></head>
 <body>
-<th:block th:replace="template :: header"/>
+<th:block th:replace="~{template :: header}" />
+
 
 
 <section class="main-content920">
@@ -12,32 +13,32 @@
                 <div class="ask-question-input-part032">
                     <h4 th:text="#{menu.ask_question}">Ask question</h4>
                     <hr>
-                    <form th:object="${question}" th:action="@{/questions}" method="post" enctype="multipart/form-data">
+                    <form th:object="${question}" th:action="@{/questions/add}" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="username" th:text="#{menu.username}">User name*</label>
-                            <input type="text" name="fname" class="form-control" id="username" th:placeholder="#{menu.placeholder_name}">
+                            <input type="text" name="username" class="form-control" id="username" th:placeholder="#{menu.placeholder_name}" required>
                         </div>
                         <div class="form-group">
                             <label for="email">E-Mail*</label>
-                            <input type="email" name="email" class="form-control" id="email" th:placeholder="#{menu.placeholder_email}">
+                            <input type="email" name="email" class="form-control" id="email" th:placeholder="#{menu.placeholder_email}" required>
                         </div>
                         <div class="form-group">
-                            <label for="question-title" th:text="#{menu.question_title}">Question-Title*</label>
-                            <input type="text" name="question-title" class="form-control" id="question-title" th:placeholder="#{menu.placeholder_question_title}">
+                            <label for="title" th:text="#{menu.question_title}">Question-Title*</label>
+                            <input type="text" name="title" class="form-control" id="title" th:placeholder="#{menu.placeholder_question_title}" required>
                         </div>
                         <div class="form-group">
                             <label for="category" th:text="#{menu.category}">Category*</label>
-                            <select name="category" class="form-control" id="category">
+                            <select name="category" class="form-control" id="category" required>
                                 <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="attachment" th:text="#{menu.attachment}">Attachment*</label>
-                            <input type="file" name="ffile" class="form-control" id="attachment">
+                            <input type="file" name="attachment" class="form-control" id="attachment">
                         </div>
                         <div class="form-group">
                             <span th:text="#{menu.choose}">Choose*</span>
-                            <textarea id="txtEditor" name="content" class="form-control"></textarea>
+                            <label for="txtEditor"></label><textarea id="txtEditor" name="content" class="form-control"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" th:text="#{menu.publish_your_question}">Publish your Question</button>
                     </form>
@@ -49,7 +50,7 @@
 </section>
 
 <!--    footer -->
-<th:block th:replace="template :: footer"/>
+<th:block th:replace="~{template :: footer}" />
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>

@@ -26,7 +26,7 @@ insert into categories (id, name) values
 
 
 --select * from questions;
-insert into questions (id, name, category_id) values
+insert into questions (id, content, category_id) values
    (gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje w Polsce?', (select id from categories where name = 'Turystyka')),
    (gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje nad Bałtykiem?', (select id from categories where name = 'Turystyka')),
 (gen_random_uuid(), 'Dlaczego warto uczyć się programowania?', (select id from categories where name = 'Edukacja')),
