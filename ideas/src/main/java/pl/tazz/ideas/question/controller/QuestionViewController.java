@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.tazz.ideas.IdeasConfiguration;
-import pl.tazz.ideas.category.service.CategoryService;
 import pl.tazz.ideas.common.controller.ContorllerUtils;
 import pl.tazz.ideas.common.controller.IdeasCommonViewController;
 import pl.tazz.ideas.question.domain.model.Question;
@@ -23,7 +22,6 @@ public class QuestionViewController extends IdeasCommonViewController {
 
     private final QuestionService questionsService;
     private final AnswerService answersService;
-    private final CategoryService categoryService;
     private final IdeasConfiguration ideasConfiguration;
 
     @GetMapping({"/", ""})
@@ -90,12 +88,7 @@ public class QuestionViewController extends IdeasCommonViewController {
     }
 
     @PostMapping("/add")
-    public String addQuestion(@RequestParam String username, @RequestParam String email, @RequestParam String title, @RequestParam String content) {
-        Question question = new Question();
-        question.setUsername(username);
-        question.setEmail(email);
-        question.setTitle(title);
-        question.setContent(content);
+    public String addQuestion(@ModelAttribute Question question) {
         questionsService.createQuestion(question);
         return "redirect:/questions";
     }

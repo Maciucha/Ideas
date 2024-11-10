@@ -33,8 +33,12 @@ public class QuestionService {
     @Transactional
     public Question createQuestion(Question questionRequest) {
         Question question = new Question();
-
         question.setName(questionRequest.getName());
+        question.setUsername(questionRequest.getUsername());
+        question.setEmail(questionRequest.getEmail());
+        question.setTitle(questionRequest.getTitle());
+        question.setContent(questionRequest.getContent());
+        question.setCategory(questionRequest.getCategory());
         return questionRepository.save(question);
     }
 

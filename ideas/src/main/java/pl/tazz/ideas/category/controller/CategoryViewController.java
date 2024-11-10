@@ -23,6 +23,8 @@ public class CategoryViewController extends IdeasCommonViewController {
     private final QuestionService questionService;
 
 
+
+
     @GetMapping("{id}")
     public String singleView(@PathVariable UUID id, Model model) {
         Category category = categoryService.getCategory(id);
