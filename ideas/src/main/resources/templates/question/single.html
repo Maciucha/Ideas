@@ -8,17 +8,15 @@
         <div class="row g-5">
             <div class="col-md-8">
                 <article class="blog-post">
+                    <h2 th:text="#{menu.question} + ':'" class="underlineBlue">Question:</h2>
                     <h2 class="blog-post-title" th:text="${question.name}"></h2>
 
                     <table class="table">
-                        <thead>
-                            <tr>
-                                <th th:text="#{menu.name}">Name</th>
-                                <th th:text="#{menu.edit}">Edit</th>
-                                <th th:text="#{menu.delete}">Delete</th>
-                            </tr>
-                        </thead>
                         <tbody>
+                            <tr>
+                                <td th:text="${question.content}">Content</td>
+                            </tr>
+
                             <tr th:each="answer : ${answers}">
                                 <td th:text="${answer.name}">Answer</td>
                                 <td>x</td>

@@ -79,4 +79,9 @@ public class QuestionService {
     public Page<Question> findByQuery(String query, Pageable pageable) {
         return questionRepository.findByQuery(query, pageable);
     }
+
+    public Question findQuestionById(UUID id) {
+
+        return questionRepository.getReferenceById(id);
+    }
 }

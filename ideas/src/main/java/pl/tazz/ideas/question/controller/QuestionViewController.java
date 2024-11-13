@@ -20,14 +20,14 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class QuestionViewController extends IdeasCommonViewController {
 
-    private final QuestionService questionsService;
+    private final QuestionService questionService;
     private final AnswerService answersService;
     private final IdeasConfiguration ideasConfiguration;
 
     @GetMapping({"/", ""})
     public String indexViev(@RequestParam(name = "page", defaultValue = "1") Integer page, Model model) {
         PageRequest pageRequest = PageRequest.of(page - 1, 2);
-        Page<Question> questionsPage = questionsService.getQuestions(pageRequest);
+        Page<Question> questionsPage = questionService.getQuestions(pageRequest);
         model.addAttribute("questionsPage", questionsPage);
         addGlobalAttributes(model);
 
@@ -38,25 +38,16 @@ public class QuestionViewController extends IdeasCommonViewController {
     @GetMapping("{id}")
     public String singleViev(@PathVariable UUID id, Model model) {
 
-        model.addAttribute("question", questionsService.getQuestion(id));
+        model.addAttribute("question", questionService.getQuestion(id));
         model.addAttribute("answers", answersService.getAnswers(id));
         addGlobalAttributes(model);
 
         return "question/single";
     }
 
-    @GetMapping("add")
-    public String addViev(Model model) {
-        model.addAttribute("question", new Question());
-
-        addGlobalAttributes(model);
-
-        return "question/add";
-    }
-
     @PostMapping
     public String add(Question question) {
-        questionsService.createQuestion(question);
+        questionService.createQuestion(question);
 
         return "redirect:/questions";
     }
@@ -65,7 +56,7 @@ public class QuestionViewController extends IdeasCommonViewController {
     public String hotViev(@RequestParam(name = "page", defaultValue = "1") Integer page, Model model) {
 
         PageRequest pageRequest = PageRequest.of(page - 1, ideasConfiguration.getPagingPageSize());
-        Page<Question> questionsPage = questionsService.findHot(pageRequest);
+        Page<Question> questionsPage = questionService.findHot(pageRequest);
 
         model.addAttribute("questionsPage", questionsPage);
         ContorllerUtils.paging(model, questionsPage);
@@ -78,7 +69,7 @@ public class QuestionViewController extends IdeasCommonViewController {
     public String unansweredView(@RequestParam(name = "page", defaultValue = "1") Integer page, Model model) {
 
         PageRequest pageRequest = PageRequest.of(page - 1, ideasConfiguration.getPagingPageSize());
-        Page<Question> questionsPage = questionsService.findUnanswered(pageRequest);
+        Page<Question> questionsPage = questionService.findUnanswered(pageRequest);
 
         model.addAttribute("questionsPage", questionsPage);
         ContorllerUtils.paging(model, questionsPage);
@@ -87,9 +78,18 @@ public class QuestionViewController extends IdeasCommonViewController {
         return "question/index";
     }
 
+    @GetMapping("add")
+    public String addViev(Model model) {
+        model.addAttribute("question", new Question());
+
+        addGlobalAttributes(model);
+
+        return "question/add";
+    }
+
     @PostMapping("/add")
     public String addQuestion(@ModelAttribute Question question) {
-        questionsService.createQuestion(question);
+        questionService.createQuestion(question);
         return "redirect:/questions";
     }
 }

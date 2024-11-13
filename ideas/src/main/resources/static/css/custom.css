@@ -4,3 +4,19 @@
     bottom: 8px;
 
 }
+
+
+.bold-underline {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.underlineGray {
+    text-decoration: underline;
+    color: gray;
+}
+
+.underlineBlue {
+    text-decoration: underline;
+    color: darkblue;
+}
