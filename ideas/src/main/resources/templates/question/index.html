@@ -18,7 +18,9 @@
                     </thead>
                     <tbody>
                     <tr th:each="question : ${questionsPage.content}">
-                        <td th:text="${question.name}">Question</td>
+                        <td>
+                            <a th:href="@{'/questions/'+${question.id}}" th:text="${question.name}">Question</a>
+                        </td>
                         <td>x</td>
                         <td>x</td>
                     </tr>
