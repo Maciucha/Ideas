@@ -20,3 +20,8 @@
     text-decoration: underline;
     color: darkblue;
 }
+
+.navCategory a:hover {
+    color: blue;
+    text-decoration: underline;
+}

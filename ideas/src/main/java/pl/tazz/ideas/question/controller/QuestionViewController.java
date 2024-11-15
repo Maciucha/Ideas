@@ -82,13 +82,6 @@ public class QuestionViewController extends IdeasCommonViewController {
         return "question/add";
     }
 
-//    @PostMapping
-//    public String add(Question question) {
-//        questionService.createQuestion(question);
-//
-//        return "redirect:/questions";
-//    }
-
     @PostMapping("/add")
     public String addQuestion(@ModelAttribute Question question) {
         questionService.createQuestion(question);
