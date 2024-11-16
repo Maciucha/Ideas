@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.tazz.ideas.common.dto.QuestionMapper;
 import pl.tazz.ideas.question.domain.model.Question;
 import pl.tazz.ideas.question.domain.repository.QuestionRepository;
 
@@ -17,6 +18,7 @@ public class QuestionService {
 
 
     private final QuestionRepository questionRepository;
+    private final QuestionMapper questionMapper;
 
 
     @Transactional(readOnly = true)
@@ -33,21 +35,14 @@ public class QuestionService {
     @Transactional
     public Question createQuestion(Question questionRequest) {
         Question question = new Question();
-        question.setName(questionRequest.getName());
-        question.setUsername(questionRequest.getUsername());
-        question.setEmail(questionRequest.getEmail());
-        question.setTitle(questionRequest.getTitle());
-        question.setContent(questionRequest.getContent());
-        question.setCategory(questionRequest.getCategory());
+        questionMapper.copyProperties(questionRequest, question);
         return questionRepository.save(question);
     }
 
     @Transactional
     public Question updateQuestion(UUID id, Question questionRequest) {
-
         Question question = questionRepository.getReferenceById(id);
-
-        question.setName(questionRequest.getName());
+        questionMapper.copyProperties(questionRequest, question);
         return questionRepository.save(question);
     }
 
