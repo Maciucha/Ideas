@@ -29,8 +29,9 @@ public class QuestionService {
 
     @Transactional(readOnly = true)
     public Question getQuestion(UUID id) {
-        return questionRepository.getReferenceById(id);
+        return questionRepository.findById(id).orElseThrow(() -> new RuntimeException("Question not found"));
     }
+
 
     @Transactional
     public Question createQuestion(Question questionRequest) {

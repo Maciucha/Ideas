@@ -30,9 +30,11 @@ public class Answer {
         this.id = UUID.randomUUID();
     }
 
-    public Answer(String name) {
+    public Answer(String name, String content, Question question) {
         this();
         this.name = name;
+        this.content = content;
+        this.question = question;
 
     }
 }

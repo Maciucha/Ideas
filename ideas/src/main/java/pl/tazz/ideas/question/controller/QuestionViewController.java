@@ -7,12 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.tazz.ideas.IdeasConfiguration;
+import pl.tazz.ideas.category.domain.model.Category;
 import pl.tazz.ideas.common.controller.ContorllerUtils;
 import pl.tazz.ideas.common.controller.IdeasCommonViewController;
+import pl.tazz.ideas.question.domain.model.Answer;
 import pl.tazz.ideas.question.domain.model.Question;
 import pl.tazz.ideas.question.service.AnswerService;
 import pl.tazz.ideas.question.service.QuestionService;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -38,17 +41,18 @@ public class QuestionViewController extends IdeasCommonViewController {
 
 
     @GetMapping("{id}")
-    public String singleViev(@PathVariable UUID id, Model model) {
-
+    public String singleView(@PathVariable UUID id, Model model) {
+        List<Answer> answers = answersService.getAnswers(id);
         model.addAttribute("question", questionService.getQuestion(id));
-        model.addAttribute("answers", answersService.getAnswers(id));
+        model.addAttribute("answers", answers);
         addGlobalAttributes(model);
 
         return "question/single";
     }
 
+
     @GetMapping("hot")
-    public String hotViev(@RequestParam(name = "page", defaultValue = "1") Integer page, Model model) {
+    public String hotView(@RequestParam(name = "page", defaultValue = "1") Integer page, Model model) {
 
         PageRequest pageRequest = PageRequest.of(page - 1, ideasConfiguration.getPagingPageSize());
         Page<Question> questionsPage = questionService.findHot(pageRequest);
@@ -74,13 +78,19 @@ public class QuestionViewController extends IdeasCommonViewController {
     }
 
     @GetMapping("add")
-    public String addViev(Model model) {
-        model.addAttribute("question", new Question());
+    public String addView(@RequestParam(name = "categoryId", required = false) UUID categoryId, Model model) {
+        Question question = new Question();
+        if (categoryId != null) {
+            Category category = categoryService.getCategory(categoryId);
+            question.setCategory(category);
+        }
+        model.addAttribute("question", question);
 
         addGlobalAttributes(model);
 
         return "question/add";
     }
+
 
     @PostMapping("/add")
     public String addQuestion(@ModelAttribute Question question) {
