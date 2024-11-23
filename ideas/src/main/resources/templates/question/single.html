@@ -10,29 +10,12 @@
             <article class="blog-post">
                 <h2 th:text="#{menu.question} + ':'" class="underlineBlue">Question:</h2>
                 <h2 class="blog-post-title" th:text="${question.name}"></h2>
-
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <td th:text="${question.content}">Content</td>
-                    </tr>
-
-                    <tr th:each="answer : ${answers}">
-                        <td th:text="${answer.name}">Answer</td>
-                        <td>
-                            <a th:href="@{'/answers/add?questionId=' + ${question.id}}" class="btn btn-sm btn-outline-info"
-                               th:text="#{button.answer}">Answer</a>
-                        </td>
-                    </tr>
-
-                    </tbody>
-                </table>
             </article>
 
-            <!--            <nav class="blog-pagination" aria-label="Pagination">-->
-            <!--                   <a th:href="@{'/answers/add'}" class="btn btn-sm btn-outline-info"-->
-            <!--                   th:text="#{button.answer}">Answer</a>-->
-            <!--            </nav>-->
+                        <nav class="blog-pagination" aria-label="Pagination">
+                            <a th:href="@{/answers/add(questionId=${question.id})}" class="btn btn-sm btn-outline-info"
+                               th:text="#{button.answer}">Answer</a>
+                        </nav>
         </div>
 
         <div class="col-md-4">
@@ -74,6 +57,6 @@
     </div>
 </main>
 
-<th:block th:replace="~{template :: header}"/>
+<th:block th:replace="~{template :: footer}"/>
 </body>
 </html>

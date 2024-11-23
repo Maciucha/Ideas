@@ -48,11 +48,17 @@ public class AnswerViewController extends IdeasCommonViewController {
         return "answer/single";
     }
 
-    @GetMapping("add")
-    public String addView(Model model) {
-        model.addAttribute("answer", new Answer());
+    @GetMapping("/add")
+    public String addView(@RequestParam(name = "questionId", required = false) UUID id, Model model) {
 
+        System.out.println("Received questionId: " + id);
+        if (id == null) {
+            throw new IllegalArgumentException("Parametr 'questionId' jest wymagany.");
+        }
+        Question question = questionService.getQuestion(id);
+        model.addAttribute("question", question);
         addGlobalAttributes(model);
+        model.addAttribute("answer", new Answer());
 
         return "answer/add";
     }

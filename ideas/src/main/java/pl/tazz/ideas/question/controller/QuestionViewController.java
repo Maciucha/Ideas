@@ -42,6 +42,7 @@ public class QuestionViewController extends IdeasCommonViewController {
 
     @GetMapping("{id}")
     public String singleView(@PathVariable UUID id, Model model) {
+        System.out.println("Fetching question with ID: " + id); // Debug
         List<Answer> answers = answersService.getAnswers(id);
         model.addAttribute("question", questionService.getQuestion(id));
         model.addAttribute("answers", answers);
