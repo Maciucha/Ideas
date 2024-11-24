@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head th:replace="~{template :: head(title = '100 ideas - Answer')}"><title>Answer</title></head>
 <body>
 <div class="container">
@@ -70,8 +70,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div  class="ask-question-input-part032">
-                    <h4 th:text="#{menu.answer_the_question}">Answer question</h4>
-                    <h4 class="blueText" th:text="${question.name}">Question Name</h4>
+                    <h4>
+                        <span th:text="#{menu.answer_the_question}">Answer the Question</span>
+                        <span class="blueText" th:text="${question.username}"></span>
+                    </h4>
+                    <h4>
+                            <span th:text="#{menu.question} + ':'">Question</span>
+                        <a href="questions/" th:href="@{/questions/{id}(id=${question.id})}" class="blueText" th:text="${question.name}">Question Name</a>
+                    </h4>
                     <hr>
                     <form th:object="${answer}" th:action="@{/answers/add}" method="post" enctype="multipart/form-data">
                         <div class="form-group">
