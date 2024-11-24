@@ -27,7 +27,7 @@
 
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" th:href="@{/answers/add(lang=${'en'}, questionId=${question.id})}">
-                            <img src="/img/flag-en.png" alt="English" class="img-fluid" style="width: 20px;"/>
+                                <img src="/img/flag-en.png" alt="English" class="img-fluid" style="width: 20px;"/>
                                 <span th:text="#{language.english}">English</span>
                             </a>
                             <a class="dropdown-item" th:href="@{/answers/add(lang=${'pl'}, questionId=${question.id})}">
@@ -44,7 +44,12 @@
 
 
                 <a class="link-secondary" href="/search" aria-label="Search">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img"
+                         viewBox="0 0 24 24"><title>Search</title>
+                        <circle cx="10.5" cy="10.5" r="7.5"/>
+                        <path d="M21 21l-5.2-5.2"/>
+                    </svg>
                 </a>
                 <a class="btn btn-sm btn-outline-secondary" href="#" th:utext="#{menu.signup}">Sign up</a>
             </div>
@@ -64,29 +69,39 @@
 </div>
 
 
-
 <section class="main-content920">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div  class="ask-question-input-part032">
+                <div class="ask-question-input-part032">
                     <h4>
                         <span th:text="#{menu.answer_the_question}">Answer the Question</span>
                         <span class="blueText" th:text="${question.username}"></span>
                     </h4>
-                    <h4>
-                            <span th:text="#{menu.question} + ':'">Question</span>
-                        <a href="questions/" th:href="@{/questions/{id}(id=${question.id})}" class="blueText" th:text="${question.name}">Question Name</a>
-                    </h4>
                     <hr>
+                    <h5>
+                        <span th:text="#{menu.question} + ':'">Question</span>
+                        <a href="questions/" th:href="@{/questions/{id}(id=${question.id})}" class="blueText"
+                           th:text="${question.name}">Question Name</a>
+                    </h5>
+                    <p><i th:text="${question.content}">Question content</i></p>
+
+
+                    <hr>
+
                     <form th:object="${answer}" th:action="@{/answers/add}" method="post" enctype="multipart/form-data">
+                        <!-- Ukryte pole dla question.id -->
+                        <input type="hidden" name="questionId" th:value="${question.id}"/>
+
                         <div class="form-group">
                             <label for="username" th:text="#{menu.username}">User name*</label>
-                            <input type="text" name="username" class="form-control" id="username" th:placeholder="#{menu.placeholder_name}" required>
+                            <input type="text" name="username" class="form-control" id="username"
+                                   th:placeholder="#{menu.placeholder_name}" required>
                         </div>
                         <div class="form-group">
                             <label for="email">E-Mail*</label>
-                            <input type="email" name="email" class="form-control" id="email" th:placeholder="#{menu.placeholder_email}" required>
+                            <input type="email" name="email" class="form-control" id="email"
+                                   th:placeholder="#{menu.placeholder_email}" required>
                         </div>
                         <div class="form-group">
                             <label for="name" th:text="#{menu.question_title}">Question-Title*</label>
@@ -99,7 +114,8 @@
                         </div>
                         <div class="form-group">
                             <span th:text="#{menu.choose}">Choose*</span>
-                            <label for="txtEditor"></label><textarea id="txtEditor" name="content" class="form-control"></textarea>
+                            <label for="txtEditor"></label>
+                            <textarea id="txtEditor" name="content" class="form-control"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" th:text="#{menu.publish_your_answer}">Publish your Answer</button>
                     </form>
@@ -111,7 +127,7 @@
 </section>
 
 <!--    footer -->
-<th:block th:replace="~{template :: footer}" />
+<th:block th:replace="~{template :: footer}"/>
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
@@ -120,7 +136,7 @@
     $(document).ready(function () {
         $("#txtEditor").Editor();
 
-         $("form").submit(function(e) {
+        $("form").submit(function (e) {
             var contentValue = $("#txtEditor").Editor("getText");
             $("#txtEditor").val(contentValue);
         });

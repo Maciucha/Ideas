@@ -64,17 +64,24 @@ public class AnswerViewController extends IdeasCommonViewController {
     }
 
     @PostMapping("/add")
-    public String addAnswer(@ModelAttribute Answer answer) {
-        if (answer.getQuestion() == null || answer.getQuestion().getId() == null) {
-            throw new IllegalArgumentException("Brakuje ID pytania w odpowiedzi.");
+    public String addAnswer(@RequestParam("questionId") UUID questionId,
+                            @ModelAttribute Answer answer) {
+
+        if (questionId == null) {
+            throw new IllegalArgumentException("Brakuje ID pytania.");
         }
 
-        UUID questionId = answer.getQuestion().getId();
         Question question = questionService.getQuestion(questionId);
-        answer.setQuestion(question);
+        if (question == null) {
+            throw new IllegalArgumentException("Pytanie o ID " + questionId + " nie istnieje.");
+        }
 
+        // Przypisuję pytanie do odpowiedzi
+        answer.setQuestion(question);
         answersService.createAnswer(questionId, answer);
-        return "redirect:/answers";
+
+        return "redirect:/questions/" + questionId;
     }
+
 
 }

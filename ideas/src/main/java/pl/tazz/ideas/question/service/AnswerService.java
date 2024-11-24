@@ -30,17 +30,19 @@ public class AnswerService {
 
     @Transactional
     public Answer createAnswer(UUID questionId, Answer answerRequest) {
-        Answer answer = new Answer();
-        answer.setName(answerRequest.getName());
-
+        // Pobieramm pytanie z bazy danych
         Question question = questionRepository.getReferenceById(questionId);
-        question.addAnswer(answer);
+        if (question == null) {
+            throw new IllegalArgumentException("Pytanie o podanym ID nie istnieje.");
+        }
 
-        answerRepository.save(answer);
-        questionRepository.save(question);
+        // Powiązuję odpowiedź z pytaniem
+        answerRequest.setQuestion(question);
+        answerRepository.save(answerRequest);
 
-        return answer;
+        return answerRequest;
     }
+
 
     @Transactional
     public Answer updateAnswer(UUID answerId, Answer answerRequest) {
