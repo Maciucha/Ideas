@@ -90,7 +90,7 @@
                     <hr>
 
                     <form th:object="${answer}" th:action="@{/answers/add}" method="post" enctype="multipart/form-data">
-                        <!-- Ukryte pole dla question.id -->
+
                         <input type="hidden" name="questionId" th:value="${question.id}"/>
 
                         <div class="form-group">

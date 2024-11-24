@@ -23,6 +23,12 @@
                         </nav>
 
             <h5 th:text="#{menu.answers}">Answers:</h5>
+            <div th:each="answer : ${answers}" class="answer-block">
+                <h6 th:text="${answer.username}"></h6>
+                <p th:text="${answer.content}"></p>
+            </div>
+
+
 
         </div>
 

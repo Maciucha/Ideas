@@ -22,6 +22,8 @@ public class Answer {
 
     private String name;
     private String content;
+    private String username;
+    private String email;
 
     @ManyToOne
     private Question question;

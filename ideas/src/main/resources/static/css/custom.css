@@ -29,3 +29,21 @@
 .blueText {
     color: darkblue;
 }
+
+.answer-block {
+    background-color: #f0f8ff;  /* Jasny niebieski */
+    border-radius: 8px;         /* Zaokrąglone rogi */
+    padding: 15px;              /* Padding wokół tekstu */
+    margin-bottom: 15px;        /* Odstęp między odpowiedziami */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Cień dla lepszego efektu */
+}
+
+.answer-block h6 {
+    font-weight: bold;
+    color: #333;  /* Kolor tekstu nagłówka */
+}
+
+.answer-block p {
+    font-size: 1rem;
+    color: #555;  /* Kolor tekstu odpowiedzi */
+}
