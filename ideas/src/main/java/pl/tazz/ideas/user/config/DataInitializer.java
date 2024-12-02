@@ -1,4 +1,4 @@
-package pl.tazz.ideas.users.config;
+package pl.tazz.ideas.user.config;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,12 +7,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import pl.tazz.ideas.users.domain.model.User;
-import pl.tazz.ideas.users.domain.model.Role;
-import pl.tazz.ideas.users.domain.repository.RoleRepository;
-import pl.tazz.ideas.users.domain.repository.UserRepository;
+import pl.tazz.ideas.user.domain.model.User;
+import pl.tazz.ideas.user.domain.model.Role;
+import pl.tazz.ideas.user.domain.repository.RoleRepository;
+import pl.tazz.ideas.user.domain.repository.UserRepository;
 
-import java.beans.Transient;
 import java.util.Optional;
 import java.util.Set;
 

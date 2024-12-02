@@ -1,4 +1,4 @@
-package pl.tazz.ideas.users.service;
+package pl.tazz.ideas.user.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.tazz.ideas.users.domain.model.User;
-import pl.tazz.ideas.users.domain.repository.UserRepository;
+import pl.tazz.ideas.user.domain.model.User;
+import pl.tazz.ideas.user.domain.repository.UserRepository;
 
 import java.util.Set;
 import java.util.stream.Collectors;

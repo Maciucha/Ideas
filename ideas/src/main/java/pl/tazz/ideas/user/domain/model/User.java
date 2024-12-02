@@ -1,4 +1,4 @@
-package pl.tazz.ideas.users.domain.model;
+package pl.tazz.ideas.user.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
