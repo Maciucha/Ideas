@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{template :: head(title = '100 ideas - Kategoria:' +'  '+${category.name})}"><title>Administration - Single Category</title></head>
+<head th:replace="~{includes/template :: head(title = '100 ideas - Kategoria:' +'  '+${category.name})}"><title>Administration - Single Category</title></head>
 <body>
-    <th:block th:replace="~{template :: header}" />
+    <th:block th:replace="~{includes/template :: header}" />
 
     <main class="container">
         <div class="row g-5">
@@ -81,6 +81,6 @@
 
     </main>
 
-    <th:block th:replace="~{template :: footer}" />
+    <th:block th:replace="~{includes/template :: footer}" />
 </body>
 </html>

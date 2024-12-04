@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="template :: head(title = '100 ideas')"></head>
+    <head th:replace="includes/template :: head(title = '100 ideas')"></head>
     <body>
-       <th:block th:replace="template :: header" />
+       <th:block th:replace="includes/template :: header" />
 
        <main class="container">
            <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
@@ -214,6 +214,6 @@
 
        </main>
 
-        <th:block th:replace="template :: footer" />
+        <th:block th:replace="includes/template :: footer" />
     </body>
 </html>

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{template :: head(title = '100 ideas - Ask')}"><title>Ask</title></head>
+<head th:replace="~{includes/template :: head(title = '100 ideas - Ask')}"><title>Ask</title></head>
 <body>
-<th:block th:replace="~{template :: header}" />
+<th:block th:replace="~{includes/template :: header}" />
 
 
 
@@ -54,7 +54,7 @@
 </section>
 
 <!--    footer -->
-<th:block th:replace="~{template :: footer}" />
+<th:block th:replace="~{includes/template :: footer}" />
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>

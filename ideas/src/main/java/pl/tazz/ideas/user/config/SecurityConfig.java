@@ -20,15 +20,38 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(authorize -> authorize.requestMatchers("/admin/**").hasRole("ADMIN").requestMatchers("/user/**").hasRole("USER").anyRequest().permitAll()).formLogin(form -> form.loginPage("/login").permitAll().successHandler(new AuthenticationSuccessHandler() {
-            @Override
-            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                // Po zalogowaniu przekieruj na stronę, na której użytkownik wcześniej był
-                String targetUrl = request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST") != null ? ((SavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST")).getRedirectUrl() : "/";
-                response.sendRedirect(targetUrl);  // Przekierowanie na poprzednią stronę
-            }
-        })).exceptionHandling(exceptions -> exceptions.accessDeniedPage("/login")  // Przekierowanie na stronę logowania przy 403
-        ).logout(logout -> logout.logoutSuccessUrl("/questions/").permitAll());
+        http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").hasRole("USER")
+                        .anyRequest().permitAll()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll()
+                        .successHandler(new AuthenticationSuccessHandler() {
+                            @Override
+                            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+                                // Pobierz poprzednią stronę, na której użytkownik był przed logowaniem
+                                SavedRequest savedRequest = (SavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
+
+                                String targetUrl = "/";
+                                if (savedRequest != null) {
+                                    targetUrl = savedRequest.getRedirectUrl();
+                                }
+
+                                // Przekieruj na poprzednią stronę lub stronę domyślną
+                                response.sendRedirect(targetUrl);
+                            }
+                        })
+                )
+                .exceptionHandling(exceptions -> exceptions
+                        .accessDeniedPage("/login")  // Przekierowanie na stronę logowania przy błędzie 403
+                )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/questions/")
+                        .permitAll()
+                );
         return http.build();
     }
 

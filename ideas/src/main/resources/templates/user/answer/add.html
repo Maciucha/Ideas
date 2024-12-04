@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head th:replace="~{template :: head(title = '100 ideas - Answer')}"><title>Answer</title></head>
+<head th:replace="~{includes/template :: head(title = '100 ideas - Answer')}"><title>Answer</title></head>
 <body>
 <div class="container">
     <header class="blog-header py-3">
@@ -26,15 +26,15 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" th:href="@{/answers/add(lang=${'en'}, questionId=${question.id})}">
+                            <a class="dropdown-item" th:href="@{/user/answers/add(lang=${'en'}, questionId=${question.id})}">
                                 <img src="/img/flag-en.png" alt="English" class="img-fluid" style="width: 20px;"/>
                                 <span th:text="#{language.english}">English</span>
                             </a>
-                            <a class="dropdown-item" th:href="@{/answers/add(lang=${'pl'}, questionId=${question.id})}">
+                            <a class="dropdown-item" th:href="@{/user/answers/add(lang=${'pl'}, questionId=${question.id})}">
                                 <img src="/img/flag-pl.png" alt="Polski" class="img-fluid" style="width: 20px;"/>
                                 <span th:text="#{language.polish}">Polski</span>
                             </a>
-                            <a class="dropdown-item" th:href="@{/answers/add(lang=${'de'}, questionId=${question.id})}">
+                            <a class="dropdown-item" th:href="@{/user/answers/add(lang=${'de'}, questionId=${question.id})}">
                                 <img src="/img/flag-de.png" alt="Deutsch" class="img-fluid" style="width: 20px;"/>
                                 <span th:text="#{language.german}">Deutsch</span>
                             </a>
@@ -89,18 +89,18 @@
 
                     <hr>
 
-                    <form th:object="${answer}" th:action="@{/answers/add}" method="post" enctype="multipart/form-data">
+                    <form th:object="${answer}" th:action="@{/user/answers/add}" method="post" enctype="multipart/form-data">
 
                         <input type="hidden" name="questionId" th:value="${question.id}"/>
 
                         <div class="form-group">
                             <label for="username" th:text="#{menu.username}">User name*</label>
                             <input type="text" name="username" class="form-control" id="username"
-                                   th:placeholder="#{menu.placeholder_name}" required>
+                                   th:placeholder="${username}" readonly required>
                         </div>
                         <div class="form-group">
-                            <label for="email">E-Mail*</label>
-                            <input type="email" name="email" class="form-control" id="email"
+
+                            <input type="hidden" name="email" class="form-control" id="email"
                                    th:placeholder="#{menu.placeholder_email}" required>
                         </div>
                         <div class="form-group">
@@ -127,7 +127,7 @@
 </section>
 
 <!--    footer -->
-<th:block th:replace="~{template :: footer}"/>
+<th:block th:replace="~{includes/template :: footer}"/>
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
