@@ -34,7 +34,7 @@ public class DataInitializer implements CommandLineRunner {
     @Transactional
     @Override
     public void run(String... args) throws Exception {
-        // Sprawdzanie czy role już istnieją w bazie, aby uniknąć zapisu tego samego obiektu wielokrotnie
+
         if (roleRepository.count() == 0) {
             Role adminRole = new Role();
             adminRole.setName("ADMIN");
@@ -45,7 +45,7 @@ public class DataInitializer implements CommandLineRunner {
             roleRepository.save(userRole);
         }
 
-        // Pobieranie ról z bazy danych
+
         Optional<Role> adminRoleOpt = roleRepository.findByName("ADMIN");
         Optional<Role> userRoleOpt = roleRepository.findByName("USER");
 

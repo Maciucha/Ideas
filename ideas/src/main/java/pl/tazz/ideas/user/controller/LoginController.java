@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LoginController {
 
-    @GetMapping("/login")
-    public String loginPage() {
-        return "user/login"; // zwraca plik templates/login.html
+    @GetMapping("login")
+    public String userLoginPage() {
+        return "user/login";
     }
+
+
 }

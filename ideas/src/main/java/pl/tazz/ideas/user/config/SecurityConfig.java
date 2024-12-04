@@ -23,7 +23,7 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
@@ -35,7 +35,7 @@ public class SecurityConfig {
                                 // Pobierz poprzednią stronę, na której użytkownik był przed logowaniem
                                 SavedRequest savedRequest = (SavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
 
-                                String targetUrl = "/";
+                                String targetUrl = "/questions";
                                 if (savedRequest != null) {
                                     targetUrl = savedRequest.getRedirectUrl();
                                 }
