@@ -16,11 +16,11 @@
                     <form th:object="${question}" th:action="@{/questions/add}" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="username" th:text="#{menu.username}">User name*</label>
-                            <input type="text" name="username" class="form-control" id="username" th:placeholder="#{menu.placeholder_name}" required>
+                            <input type="text" name="username" class="form-control" id="username" th:placeholder="${username}" readonly required>
                         </div>
                         <div class="form-group">
                             <label for="email">E-Mail*</label>
-                            <input type="email" name="email" class="form-control" id="email" th:placeholder="#{menu.placeholder_email}" required>
+                            <input type="email" name="email" class="form-control" id="email" th:placeholder="${email}" readonly required>
                         </div>
                         <div class="form-group">
                             <label for="name" th:text="#{menu.question_title}">Question-Title*</label>

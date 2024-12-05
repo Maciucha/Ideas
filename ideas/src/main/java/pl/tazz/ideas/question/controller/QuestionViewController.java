@@ -3,6 +3,9 @@ package pl.tazz.ideas.question.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +17,8 @@ import pl.tazz.ideas.question.domain.model.Answer;
 import pl.tazz.ideas.question.domain.model.Question;
 import pl.tazz.ideas.question.service.AnswerService;
 import pl.tazz.ideas.question.service.QuestionService;
+import pl.tazz.ideas.user.domain.model.User;
+import pl.tazz.ideas.user.domain.repository.UserRepository;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,6 +31,7 @@ public class QuestionViewController extends IdeasCommonViewController {
     private final QuestionService questionService;
     private final AnswerService answersService;
     private final IdeasConfiguration ideasConfiguration;
+    private final UserRepository userRepository;
 
     @GetMapping({"/", ""})
     public String indexView(@RequestParam(name = "page", defaultValue = "1") Integer page, Model model) {
@@ -84,7 +90,18 @@ public class QuestionViewController extends IdeasCommonViewController {
             Category category = categoryService.getCategory(categoryId);
             question.setCategory(category);
         }
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        String email = user.getEmail();
+
         model.addAttribute("question", question);
+        model.addAttribute("username", username);
+        model.addAttribute("email", email);
+
 
         addGlobalAttributes(model);
 
