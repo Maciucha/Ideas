@@ -51,7 +51,16 @@
                         <path d="M21 21l-5.2-5.2"/>
                     </svg>
                 </a>
-                <a class="btn btn-sm btn-outline-secondary" th:href="@{/user/login}" th:utext="#{menu.signup}">Sign up</a>
+<!--                <a class="btn btn-sm btn-outline-secondary" th:href="@{/user/login}" th:utext="#{menu.signup}">Sign up</a>-->
+                <div class="logged-user" th:if="${#authentication != null}">
+                    <p th:text="#{text.logged} + ': ' + ${#authentication.name}">Logged</p>
+                    <form method="post" action="/logout">
+                        <button class="btn btn-sm btn-outline-info" type="submit">Wyloguj się</button>
+                    </form>
+                </div>
+                <a class="btn btn-sm btn-outline-secondary" th:if="${#authentication == null}" th:href="@{/user/login}"
+                   th:utext="#{menu.signup}">Sign up</a>
+
             </div>
         </div>
     </header>
