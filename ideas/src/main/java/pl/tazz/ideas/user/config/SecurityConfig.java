@@ -51,7 +51,8 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutSuccessUrl("/questions/")
                         .permitAll()
-                );
+                )
+                .anonymous(anonymous -> anonymous.disable()); // Wyłączenie anonimowego użytkownika
         return http.build();
     }
 
