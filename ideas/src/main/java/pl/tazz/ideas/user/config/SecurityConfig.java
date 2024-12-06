@@ -1,6 +1,5 @@
 package pl.tazz.ideas.user.config;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
@@ -10,8 +9,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.IOException;
 
@@ -21,6 +21,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
+                .securityContext(securityContext -> securityContext
+                        .securityContextRepository(new HttpSessionSecurityContextRepository())
+                )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
@@ -29,20 +32,16 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
-                        .successHandler(new AuthenticationSuccessHandler() {
-                            @Override
-                            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                                // Pobierz poprzednią stronę, na której użytkownik był przed logowaniem
-                                SavedRequest savedRequest = (SavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
+                        .successHandler((HttpServletRequest request, HttpServletResponse response, Authentication authentication) -> {
+                            // Ustawiam SecurityContext dla zalogowanego użytkownika - tym rozwiązujęproblem z podwójnym logowaniem
+                            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-                                String targetUrl = "/questions";
-                                if (savedRequest != null) {
-                                    targetUrl = savedRequest.getRedirectUrl();
-                                }
+                            // Pobierzam poprzednią stronę, na której byłem przed logowaniem
+                            SavedRequest savedRequest = (SavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
+                            String targetUrl = (savedRequest != null) ? savedRequest.getRedirectUrl() : "/questions";
 
-                                // Przekieruj na poprzednią stronę lub stronę domyślną
-                                response.sendRedirect(targetUrl);
-                            }
+                            // Przekierowuje na poprzednią stronę lub stronę domyślną
+                            response.sendRedirect(targetUrl);
                         })
                 )
                 .exceptionHandling(exceptions -> exceptions
@@ -52,7 +51,7 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/questions/")
                         .permitAll()
                 )
-                .anonymous(anonymous -> anonymous.disable()); // Wyłączenie anonimowego użytkownika
+                .anonymous(anonymous -> anonymous.disable()); // Wyłączenie anonimowego użytkownika - krwi mi napsuł z formularzem :)
         return http.build();
     }
 
