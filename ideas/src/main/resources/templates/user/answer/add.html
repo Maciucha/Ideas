@@ -146,10 +146,26 @@
         $("#txtEditor").Editor();
 
         $("form").submit(function (e) {
-            var contentValue = $("#txtEditor").Editor("getText");
-            $("#txtEditor").val(contentValue);
+
+            var contentHtml = $("#txtEditor").Editor("getText");
+
+
+            var plainText = contentHtml
+                .replace(/<br\s*\/?>/g, "\n")
+                .replace(/<\/p>\s*<p>/g, "\n")
+                .replace(/<\/?p>/g, "");
+
+
+            var tempElement = document.createElement("div");
+            tempElement.innerHTML = plainText;
+            plainText = tempElement.textContent || tempElement.innerText || "";
+
+
+            $("#txtEditor").val(plainText);
         });
     });
+
+
 </script>
 
 
