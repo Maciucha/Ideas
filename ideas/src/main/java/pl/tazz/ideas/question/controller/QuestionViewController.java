@@ -92,6 +92,12 @@ public class QuestionViewController extends IdeasCommonViewController {
         }
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            // Rzucam wyjątek lub przekierowuję na stronę logowania
+            throw new IllegalStateException("User is not authenticated");
+        }
+
         String username = authentication.getName();
 
         User user = userRepository.findByUsername(username)
@@ -102,11 +108,11 @@ public class QuestionViewController extends IdeasCommonViewController {
         model.addAttribute("username", username);
         model.addAttribute("email", email);
 
-
         addGlobalAttributes(model);
 
         return "question/add";
     }
+
 
 
     @PostMapping("/add")
