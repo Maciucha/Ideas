@@ -57,23 +57,7 @@
                         100 Ideas is a space where you can ask questions and receive answers from the community. This way, you have the opportunity to engage in discussions with other participants, exchange ideas, and share knowledge. Join the discussion and find answers to the questions that matter to you!                    </p>
                 </div>
 
-                <div class="p-4">
-                    <h4 class="fst-italic" th:text="#{menu.archives}">Archives</h4>
-                    <ol class="list-unstyled mb-0">
-                        <li><a href="#">March 2021</a></li>
-                        <li><a href="#">February 2021</a></li>
-                        <li><a href="#">January 2021</a></li>
-                        <li><a href="#">December 2020</a></li>
-                        <li><a href="#">November 2020</a></li>
-                        <li><a href="#">October 2020</a></li>
-                        <li><a href="#">September 2020</a></li>
-                        <li><a href="#">August 2020</a></li>
-                        <li><a href="#">July 2020</a></li>
-                        <li><a href="#">June 2020</a></li>
-                        <li><a href="#">May 2020</a></li>
-                        <li><a href="#">April 2020</a></li>
-                    </ol>
-                </div>
+                <th:block th:replace="~{includes/template :: latest}" />
 
                 <div class="p-4">
                     <h4 class="fst-italic" th:text="#{menu.elsewhere}">Elsewhere</h4>

@@ -10,6 +10,14 @@
 	<div class="main">
 		<input type="checkbox" id="chk" aria-hidden="true">
 
+			<div th:if="${successMessage}" class="success-message">
+				<p th:text="${successMessage}"></p>
+			</div>
+
+			<div th:if="${errorMessage}" class="error-message">
+				<p th:text="${errorMessage}"></p>
+			</div>
+
 			<div class="signup">
 				<form method="post" action="/login">
 					<label for="chk">Login</label>
