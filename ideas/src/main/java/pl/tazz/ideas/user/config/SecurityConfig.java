@@ -18,6 +18,12 @@ import java.io.IOException;
 @Configuration
 public class SecurityConfig {
 
+    private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+
+    public SecurityConfig(CustomAuthenticationFailureHandler customAuthenticationFailureHandler) {
+        this.customAuthenticationFailureHandler = customAuthenticationFailureHandler;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
@@ -33,6 +39,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
+                        .failureHandler(customAuthenticationFailureHandler) // handler dla błędów
                         .successHandler((HttpServletRequest request, HttpServletResponse response, Authentication authentication) -> {
                             // Ustawiam SecurityContext dla zalogowanego użytkownika - tym rozwiązujęproblem z podwójnym logowaniem
                             SecurityContextHolder.getContext().setAuthentication(authentication);
