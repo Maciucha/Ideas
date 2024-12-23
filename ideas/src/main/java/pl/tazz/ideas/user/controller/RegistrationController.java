@@ -1,6 +1,7 @@
 package pl.tazz.ideas.user.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -20,8 +21,13 @@ public class RegistrationController {
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
-        userRegisterService.registerUser(user);
-        redirectAttributes.addFlashAttribute("successMessage", "Rejestracja zakończona sukcesem! Sprawdź swój e-mail w celu weryfikacji.");
-        return "redirect:/login";
+        try {
+            userRegisterService.registerUser(user);
+            redirectAttributes.addFlashAttribute("successMessage", "Rejestracja zakończona sukcesem! Sprawdź swój e-mail w celu weryfikacji.");
+            return "redirect:/login?success";
+        } catch (IllegalArgumentException ex) {
+            redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
+            return "redirect:/login";
+        }
     }
 }

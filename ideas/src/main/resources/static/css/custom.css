@@ -53,25 +53,16 @@
      margin: 0;
  }
 
-.success-message {
-    color: white;
+.messages {
     text-align: center;
-    font-size: 18px;
-    margin: 20px auto;
-    width: 80%;
-    border: 1px solid white;
-    padding: 10px;
-    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
+.success-message {
+    color: green;
+}
 
 .error-message {
     color: red;
-    text-align: center;
-    font-size: 18px;
-    margin: 20px auto;
-    width: 80%;
-    border: 1px solid red;
-    padding: 10px;
-    border-radius: 5px;
 }
+
