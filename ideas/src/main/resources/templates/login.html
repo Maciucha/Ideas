@@ -21,19 +21,19 @@
 
 	<div class="signup">
 		<form method="post" action="/login">
-			<label for="chk">Login</label>
-			<input type="text" id="username" name="username" required placeholder="Wpisz swoją nazwę użytkownika">
-			<input type="password" name="password" placeholder="Password" required="">
-			<button type="submit">Login</button>
+			<label for="chk" th:text="#{text.loginPage}">Login</label>
+			<input type="text" id="username" name="username" required th:placeholder="#{text.placeholderUsername}">
+			<input type="password" name="password" th:placeholder="#{text.password}" required="">
+			<button type="submit" th:text="#{text.login}">Login</button>
 		</form>
 	</div>
 
 	<div class="login">
 		<form method="post" action="/register">
-			<label for="chk" aria-hidden="true">Sign up</label>
-			<input type="text" id="registerUsername" name="username" placeholder="User name" required="">
-			<input type="email" id="registerEmail" name="email" placeholder="Email" required="">
-			<input type="password" id="registerPassword" name="password" placeholder="Password" required="">
+			<label for="chk" aria-hidden="true" th:text="#{text.signup}">Sign up</label>
+			<input type="text" id="registerUsername" name="username" th:placeholder="#{text.placeholderUsername}" required="">
+			<input type="email" id="registerEmail" name="email" th:placeholder="#{menu.placeholder_email}" required="">
+			<input type="password" id="registerPassword" name="password" th:placeholder="#{text.password}" required="">
 			<button type="submit">Sign up</button>
 		</form>
 	</div>
