@@ -51,8 +51,8 @@ public class UserRegisterService {
         String token = generateVerificationToken();
         user.setVerifyEmailToken(token);
 
-        Role userRole = roleRepository.findByName("ROLE_USER")
-                .orElseGet(() -> createDefaultRole("ROLE_USER"));
+        Role userRole = roleRepository.findByName("USER")
+                .orElseGet(() -> createDefaultRole("USER"));
 
         if (user.getRoles() == null) {
             user.setRoles(new HashSet<>());
