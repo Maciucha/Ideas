@@ -15,6 +15,8 @@ import pl.tazz.ideas.question.domain.model.Answer;
 import pl.tazz.ideas.question.domain.model.Question;
 import pl.tazz.ideas.question.service.AnswerService;
 import pl.tazz.ideas.question.service.QuestionService;
+import pl.tazz.ideas.user.domain.model.User;
+import pl.tazz.ideas.user.service.CustomUserDetailsService;
 
 import java.util.UUID;
 
@@ -26,6 +28,7 @@ public class AnswerViewController extends IdeasCommonViewController {
     private final QuestionService questionService;
     private final AnswerService answersService;
     private final IdeasConfiguration ideasConfiguration;
+    private final CustomUserDetailsService customUserDetailsService;
 
 
     @GetMapping({"/", ""})
@@ -63,7 +66,12 @@ public class AnswerViewController extends IdeasCommonViewController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String loggedInUsername = authentication.getName();
 
+        String loggedInEmail = customUserDetailsService.findByUsername(loggedInUsername)
+                .map(User::getEmail)
+                .orElse(null);
+
         model.addAttribute("username", loggedInUsername);
+        model.addAttribute("email", loggedInEmail);
 
 
         addGlobalAttributes(model);
@@ -87,7 +95,12 @@ public class AnswerViewController extends IdeasCommonViewController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String loggedInUsername = authentication.getName();
 
+        String loggedInEmail = customUserDetailsService.findByUsername(loggedInUsername)
+                .map(User::getEmail)
+                .orElse(null);
+
         answer.setUsername(loggedInUsername);
+        answer.setEmail(loggedInEmail);
 
         // Przypisuję pytanie do odpowiedzi
         answer.setQuestion(question);

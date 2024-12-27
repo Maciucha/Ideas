@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import pl.tazz.ideas.user.domain.model.User;
 import pl.tazz.ideas.user.domain.repository.UserRepository;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,15 @@ public class CustomUserDetailsService implements UserDetailsService {
     public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+    public Optional<User> findByUserEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
