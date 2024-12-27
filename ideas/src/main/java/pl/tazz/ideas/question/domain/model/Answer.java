@@ -32,11 +32,12 @@ public class Answer {
         this.id = UUID.randomUUID();
     }
 
-    public Answer(String name, String content, Question question) {
+    public Answer(String name, String content, String username, String email, Question question) {
         this();
         this.name = name;
         this.content = content;
         this.question = question;
-
+        this.username = username;
+        this.email = email;
     }
 }

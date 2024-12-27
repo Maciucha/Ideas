@@ -15,7 +15,6 @@ import pl.tazz.ideas.question.domain.model.Answer;
 import pl.tazz.ideas.question.domain.model.Question;
 import pl.tazz.ideas.question.service.AnswerService;
 import pl.tazz.ideas.question.service.QuestionService;
-import pl.tazz.ideas.user.service.CustomUserDetailsService;
 
 import java.util.UUID;
 
@@ -26,8 +25,8 @@ public class AnswerViewController extends IdeasCommonViewController {
 
     private final QuestionService questionService;
     private final AnswerService answersService;
-    private final CustomUserDetailsService customUserDetailsService;
     private final IdeasConfiguration ideasConfiguration;
+
 
     @GetMapping({"/", ""})
     public String indexView(@RequestParam(name = "page", defaultValue = "1") Integer page, Model model) {
@@ -55,7 +54,7 @@ public class AnswerViewController extends IdeasCommonViewController {
     @GetMapping("/add")
     public String addView(@RequestParam(name = "questionId", required = false) UUID id, Model model) {
 
-            if (id == null) {
+        if (id == null) {
             throw new IllegalArgumentException("Parametr 'questionId' jest wymagany.");
         }
         Question question = questionService.getQuestion(id);
@@ -63,8 +62,8 @@ public class AnswerViewController extends IdeasCommonViewController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String loggedInUsername = authentication.getName();
-        model.addAttribute("username", loggedInUsername);
 
+        model.addAttribute("username", loggedInUsername);
 
 
         addGlobalAttributes(model);
@@ -85,6 +84,10 @@ public class AnswerViewController extends IdeasCommonViewController {
         if (question == null) {
             throw new IllegalArgumentException("Pytanie o ID " + questionId + " nie istnieje.");
         }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInUsername = authentication.getName();
+
+        answer.setUsername(loggedInUsername);
 
         // Przypisuję pytanie do odpowiedzi
         answer.setQuestion(question);
