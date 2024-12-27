@@ -52,17 +52,22 @@
                     </svg>
                 </a>
 <!--                <a class="btn btn-sm btn-outline-secondary" th:href="@{/user/login}" th:utext="#{menu.signup}">Sign up</a>-->
+
                 <div class="logged-user" th:if="${#authentication != null}">
-                    <p th:text="#{text.logged} + ': ' + ${#authentication.name}">Logged</p>
+                    <div class="user-info">
+                        <p th:text="#{text.logged} + ': '">Logged</p>
+                        <p class="username" th:text="${#authentication.name}">User</p>
+                    </div>
                     <form method="post" action="/logout">
-                        <button class="btn btn-sm btn-outline-info" type="submit">Wyloguj się</button>
+                        <button class="btn btn-sm btn-danger" type="submit">Wyloguj się</button>
                     </form>
+                </div>
+
                 </div>
                 <a class="btn btn-sm btn-outline-secondary" th:if="${#authentication == null}" th:href="@{/user/login}"
                    th:utext="#{menu.signup}">Sign up</a>
 
             </div>
-        </div>
     </header>
     <p></p>
     <p></p>

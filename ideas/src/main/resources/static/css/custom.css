@@ -49,9 +49,24 @@
 }
 
 
- .logged-user p {
-     margin: 0;
- }
+.logged-user {
+    display: flex; /* Ustawienie układu w rzędzie */
+    align-items: center; /* Wyrównanie elementów w pionie */
+    justify-content: space-between; /* Rozdziela przestrzeń między elementami */
+    gap: 10px; /* Odstęp między elementami */
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.username {
+    font-weight: bold;
+    color: blue;
+}
+
 
 .messages {
     text-align: center;
