@@ -11,20 +11,22 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface QuestionRepository extends JpaRepository <Question, UUID> {
+public interface QuestionRepository extends JpaRepository<Question, UUID> {
 
     List<Question> findAllByCategoryId(UUID id);
 
     @Query("SELECT q FROM Question q ORDER BY SIZE(q.answers) DESC")
     Page<Question> findHot(Pageable pageable);
 
-
-    @Query("SELECT q FROM Question q where SIZE(q.answers) = 0")
+    @Query("SELECT q FROM Question q WHERE SIZE(q.answers) = 0")
     Page<Question> findUnanswered(Pageable pageable);
 
+    List<Question> findTop3ByOrderByCreatedDateDesc();
+
+    // Wyszukiwanie z zapytaniem w SQL
     @Query(
-            value = "select * from questions q where upper(q.name) like upper(concat('%', :query, '%'))",
-            countQuery = "select count(*) from questions q where upper(q.name) like upper(concat('%', :query, '%'))",
+            value = "SELECT * FROM questions q WHERE UPPER(q.name) LIKE UPPER(CONCAT('%', :query, '%'))",
+            countQuery = "SELECT COUNT(*) FROM questions q WHERE UPPER(q.name) LIKE UPPER(CONCAT('%', :query, '%'))",
             nativeQuery = true
     )
     Page<Question> findByQuery(String query, Pageable pageable);

@@ -370,10 +370,10 @@
 
                         <!-- Pętla wyświetlająca 3 ostatnio dodane pytania -->
                         <div th:each="question : ${latestQuestions}">
-                            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-50 position-relative">
                                 <div class="col p-4 d-flex flex-column position-static">
-                                    <h3 class="mb-0" th:text="${question.title}"></h3>
-                                    <div class="mb-1 text-muted" th:text="${#dates.format(question.createdDate, 'dd MMM yyyy')}"></div>
+                                    <h5 class="mb-0" th:text="${question.name}"></h5>
+<!--                                    <div class="mb-1 text-muted" th:text="${#dates.format(question.createdDate, 'dd MMM yyyy')}"></div>-->
                                     <p class="card-text mb-auto" th:text="${question.content}"></p>
                                     <a th:href="@{'/questions/' + ${question.id}}" class="stretched-link">Continue reading</a>
                                 </div>

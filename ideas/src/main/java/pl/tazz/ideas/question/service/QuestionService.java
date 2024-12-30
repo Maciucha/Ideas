@@ -75,4 +75,9 @@ public class QuestionService {
     public Page<Question> findByQuery(String query, Pageable pageable) {
         return questionRepository.findByQuery(query, pageable);
     }
+
+    @Transactional(readOnly = true)
+    public List<Question> getLatestQuestions() {
+        return questionRepository.findTop3ByOrderByCreatedDateDesc();
+    }
 }

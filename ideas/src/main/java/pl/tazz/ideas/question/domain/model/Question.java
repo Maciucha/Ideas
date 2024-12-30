@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import pl.tazz.ideas.category.domain.model.Category;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -37,6 +38,13 @@ public class Question {
     public Question(String name) {
         this();
         this.name = name;
+    }
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdDate;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdDate = LocalDateTime.now();
     }
 
     public void addAnswer(Answer answer) {
