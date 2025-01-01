@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kontakt do firmy PHU Tazz">
+    <link href="/css/custom.css" rel="stylesheet">
+    <title th:text="#{contact.title}">Contact</title>
+</head>
+<body>
+<header class="contact-header">
+    <h1 th:text="#{contact.title}">Contact</h1>
+</header>
+<main class="contact-main">
+    <section>
+        <h2 th:text="#{contact.info}">Informacje kontaktowe</h2>
+        <div class="contact-info">
+            <p><strong th:text="#{contact.company}">Firma:</strong> PHU Tazz Maciej Żok</p>
+            <p><strong th:text="#{contact.nip}">NIP:</strong> 5992397692</p>
+            <p><strong th:text="#{contact.phone}">Telefon:</strong> +48 721882639</p>
+            <p><strong th:text="#{contact.email}">Email:</strong> maciej@zok.mail.pl</p>
+            <p><strong th:text="#{contact.address}">Adres:</strong> ul. Perłowa 13a/8, 66-400 Gorzów Wielkopolski</p>
+        </div>
+    </section>
+    <section>
+        <h2 th:text="#{contact.form}">Formularz kontaktowy</h2>
+        <form action="/send-message" method="post">
+            <label for="name" th:text="#{contact.name}">Imię i nazwisko:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email" th:text="#{contact.email}">Email:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="message" th:text="#{contact.message}">Wiadomość:</label><br>
+            <textarea id="message" name="message" rows="5" required></textarea><br><br>
+            <button type="submit" th:text="#{contact.send}">Wyślij</button>
+        </form>
+    </section>
+</main>
+<footer class="contact-footer">
+    &copy; 2025 PHU Tazz. Wszelkie prawa zastrzeżone.
+</footer>
+</body>
+</html>

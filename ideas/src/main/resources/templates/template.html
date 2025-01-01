@@ -102,7 +102,7 @@
                         <p class="username" th:text="${#authentication.name}">User</p>
                     </div>
                     <form method="post" action="/logout">
-                        <button class="btn btn-sm btn-danger" type="submit">Wyloguj się</button>
+                        <button class="btn btn-sm btn-danger" type="submit" th:text="#{text.logout}">Wyloguj się</button>
                     </form>
                 </div>
 
@@ -341,7 +341,7 @@
     <p><a href="#">Back to top</a></p>
     <p><a href="/admin" th:text="#{menu.admin}">Admin</a></p>
     <form method="post" action="/logout">
-        <button type="submit">Wyloguj się</button>
+        <button type="submit" th:text="#{text.logout}" >Wyloguj się</button>
     </form>
 
 

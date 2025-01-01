@@ -105,7 +105,7 @@
                         <p class="username" th:text="${#authentication.name}">User</p>
                     </div>
                     <form method="post" action="/logout">
-                        <button class="btn btn-sm btn-danger" type="submit">Wyloguj się</button>
+                        <button class="btn btn-sm btn-danger" type="submit" th:text="#{text.logout}">Wyloguj się</button>
                     </form>
                 </div>
 

@@ -27,4 +27,9 @@ public class HomeViewController extends IdeasCommonViewController {
         addGlobalAttributes(model);
         return "home/index";
     }
+    @GetMapping("contact")
+    public String contactView(Model model) {
+        addGlobalAttributes(model);
+        return "home/contact";
+    }
 }

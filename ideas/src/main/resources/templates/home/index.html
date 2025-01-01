@@ -104,7 +104,7 @@
                         <p class="username" th:text="${#authentication.name}">User</p>
                     </div>
                     <form method="post" action="/logout">
-                        <button class="btn btn-sm btn-danger" type="submit">Wyloguj się</button>
+                        <button class="btn btn-sm btn-danger" type="submit" th:text="#{text.logout}">Wyloguj się</button>
                     </form>
                 </div>
 
@@ -131,25 +131,36 @@
             <!-- Lewa kolumna -->
             <div class="col-md-8">
                 <div class="row">
-                    <div class="col-12 mb-4">
+                    <div class="col-12 mb-4" id="view-all">
                         <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative">
                             <div class="col p-4 d-flex flex-column position-static">
-                                <strong class="d-inline-block mb-2 text-primary">World</strong>
-                                <h3 class="mb-0">Featured post</h3>
-                                <div class="mb-1 text-muted">Nov 12</div>
-                                <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="stretched-link">Continue reading</a>
+                                <strong class="d-inline-block mb-2 text-primary">View ALL</strong>
+                                <h3 class="mb-0" id="view-all-title">All</h3>
+                                <div class="mb-1 text-muted" id="view-all-date"></div>
+                                <p class="card-text mb-auto" id="view-all-content">Loading...</p>
+                                <a href="#" class="stretched-link" id="view-all-link">Continue reading</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 mb-4" id="view-hot">
                         <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative">
                             <div class="col p-4 d-flex flex-column position-static">
-                                <strong class="d-inline-block mb-2 text-success">Design</strong>
-                                <h3 class="mb-0">Post title</h3>
-                                <div class="mb-1 text-muted">Nov 11</div>
-                                <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="stretched-link">Continue reading</a>
+                                <strong class="d-inline-block mb-2 text-danger">View all HOT</strong>
+                                <h3 class="mb-0" id="view-hot-title">HOT</h3>
+                                <div class="mb-1 text-muted" id="view-hot-date"></div>
+                                <p class="card-text mb-auto" id="view-hot-content">Loading...</p>
+                                <a href="#" class="stretched-link" id="view-hot-link">Continue reading</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-4" id="view-unanswered">
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <strong class="d-inline-block mb-2 text-success">View all UNANSWERED</strong>
+                                <h3 class="mb-0" id="view-unanswered-title">UNANSWERED</h3>
+                                <div class="mb-1 text-muted" id="view-unanswered-date"></div>
+                                <p class="card-text mb-auto" id="view-unanswered-content">Loading...</p>
+                                <a href="#" class="stretched-link" id="view-unanswered-link">Continue reading</a>
                             </div>
                         </div>
                     </div>
@@ -192,6 +203,28 @@
     <!-- AdminLTE App -->
     <script src="/admin/js/adminlte.min.js"></script>
 </footer>
+
+    <script>
+        const updateSection = async (sectionId, apiUrl) => {
+            try {
+                // Pobieram dane z serwera
+                const response = await fetch(apiUrl);
+                const question = await response.json();
+
+                // Aktualizuję zawartość sekcji
+                document.querySelector(`#${sectionId}-title`).textContent = question.title;
+                document.querySelector(`#${sectionId}-date`).textContent = new Date(question.date).toLocaleDateString();
+                document.querySelector(`#${sectionId}-content`).textContent = question.content;
+                document.querySelector(`#${sectionId}-link`).setAttribute("href", `/questions/${question.id}`);
+            } catch (error) {
+                console.error(`Error updating section ${sectionId}:`, error);
+            }
+        };
+
+        setInterval(() => updateSection("view-all", "/api/questions/all/random"), 2000);
+        setInterval(() => updateSection("view-unanswered", "/api/questions/unanswered/random"), 2000);
+        setInterval(() => updateSection("view-hot", "/api/questions/hot/random"), 2000);
+    </script>
 
 </div>
 </body>
