@@ -37,6 +37,7 @@ public class CategoryViewController extends IdeasCommonViewController {
         String username = authentication.getName();
 
 
+        model.addAttribute("latestQuestions", questionService.getLatestQuestions());
         model.addAttribute("category", category);
         model.addAttribute("questions", questions);
         model.addAttribute("username", username);
