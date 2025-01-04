@@ -13,7 +13,6 @@ import pl.tazz.ideas.category.service.CategoryService;
 import pl.tazz.ideas.common.controller.IdeasCommonViewController;
 import pl.tazz.ideas.question.domain.model.Question;
 import pl.tazz.ideas.question.service.QuestionService;
-import pl.tazz.ideas.user.service.CustomUserDetailsService;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,9 +23,6 @@ import java.util.UUID;
 public class CategoryViewController extends IdeasCommonViewController {
     private final CategoryService categoryService;
     private final QuestionService questionService;
-    private final CustomUserDetailsService customUserDetailsService;
-
-
 
 
     @GetMapping("{id}")
@@ -43,7 +39,7 @@ public class CategoryViewController extends IdeasCommonViewController {
         model.addAttribute("username", username);
         addGlobalAttributes(model);
 
-        return "category/single";
+        return "user/category/single";
     }
 }
 

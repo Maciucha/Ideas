@@ -14,6 +14,7 @@ import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.IOException;
+import java.util.UUID;
 
 @Configuration
 public class SecurityConfig {

@@ -56,7 +56,7 @@ public class QuestionViewController extends IdeasCommonViewController {
         model.addAttribute("answers", answers);
         addGlobalAttributes(model);
 
-        return "question/single";
+        return "user/question/single";
     }
 
 
@@ -115,7 +115,7 @@ public class QuestionViewController extends IdeasCommonViewController {
 
         addGlobalAttributes(model);
 
-        return "question/add";
+        return "user/question/add";
     }
 
 
