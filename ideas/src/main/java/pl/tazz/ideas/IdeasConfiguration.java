@@ -15,7 +15,7 @@ public class IdeasConfiguration {
 
     private String name;
 
-    @Value("${paging.pageSize:10}")
+    @Value("${paging.pageSize:15}")
     private int pagingPageSize;
 
 

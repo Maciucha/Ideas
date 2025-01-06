@@ -131,10 +131,10 @@
             <!-- Lewa kolumna -->
             <div class="col-md-8">
                 <div class="row">
-                    <div class="col-12 mb-4" id="view-all">
+                    <div class="col-xxl-11 mb-4" id="view-all">
                         <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative">
                             <div class="col p-4 d-flex flex-column position-static">
-                                <strong class="d-inline-block mb-2 text-primary">View ALL</strong>
+                                <a href="/questions/all" class="d-inline-block mb-2 text-primary">View ALL</a>
                                 <h3 class="mb-0" id="view-all-title">All</h3>
                                 <div class="mb-1 text-muted" id="view-all-date"></div>
                                 <p class="card-text mb-auto" id="view-all-content">Loading...</p>
@@ -142,7 +142,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mb-4" id="view-hot">
+                    <div class="col-xxl-11 mb-4" id="view-hot">
                         <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative">
                             <div class="col p-4 d-flex flex-column position-static">
                                 <strong class="d-inline-block mb-2 text-danger">View all HOT</strong>
@@ -153,7 +153,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mb-4" id="view-unanswered">
+                    <div class="col-xxl-11 mb-4" id="view-unanswered">
                         <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative">
                             <div class="col p-4 d-flex flex-column position-static">
                                 <strong class="d-inline-block mb-2 text-success">View all UNANSWERED</strong>
@@ -212,8 +212,8 @@
                 const question = await response.json();
 
                 // Aktualizuję zawartość sekcji
-                document.querySelector(`#${sectionId}-title`).textContent = question.title;
-                document.querySelector(`#${sectionId}-date`).textContent = new Date(question.date).toLocaleDateString();
+                document.querySelector(`#${sectionId}-title`).textContent = question.name;
+                document.querySelector(`#${sectionId}-date`).textContent = new Date(question.createdDate).toLocaleDateString();
                 document.querySelector(`#${sectionId}-content`).textContent = question.content;
                 document.querySelector(`#${sectionId}-link`).setAttribute("href", `/questions/${question.id}`);
             } catch (error) {
@@ -221,10 +221,17 @@
             }
         };
 
-        setInterval(() => updateSection("view-all", "/api/questions/all/random"), 2000);
-        setInterval(() => updateSection("view-unanswered", "/api/questions/unanswered/random"), 2000);
-        setInterval(() => updateSection("view-hot", "/api/questions/hot/random"), 2000);
+        // Natychmiastowe ładowanie danych przy starcie
+        updateSection("view-all", "/api/v1/questions/all/random");
+        updateSection("view-unanswered", "/api/v1/questions/unanswered/random");
+        updateSection("view-hot", "/api/v1/questions/hot/random");
+
+        // Cykliczne odświeżanie danych co 10 sekund
+        setInterval(() => updateSection("view-all", "/api/v1/questions/all/random"), 4000);
+        setInterval(() => updateSection("view-unanswered", "/api/v1/questions/unanswered/random"), 5000);
+        setInterval(() => updateSection("view-hot", "/api/v1/questions/hot/random"), 6000);
     </script>
+
 
 </div>
 </body>

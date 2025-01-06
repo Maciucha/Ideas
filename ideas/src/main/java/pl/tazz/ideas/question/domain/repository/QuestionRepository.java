@@ -30,4 +30,13 @@ public interface QuestionRepository extends JpaRepository<Question, UUID> {
             nativeQuery = true
     )
     Page<Question> findByQuery(String query, Pageable pageable);
+
+    @Query("SELECT q FROM Question q ORDER BY SIZE(q.answers) DESC")
+    List<Question> findListAllHot();
+
+    @Query("SELECT q FROM Question q WHERE SIZE(q.answers) = 0")
+    List<Question> findListAllUnanswered();
+
+
+
 }

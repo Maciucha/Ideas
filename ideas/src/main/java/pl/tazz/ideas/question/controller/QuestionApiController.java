@@ -35,6 +35,32 @@ public class QuestionApiController {
         return questionsService.createQuestion(question);
     }
 
+    @GetMapping("/hot")
+    public Page<Question> getHotQuestions(Pageable pageable) {
+        return questionsService.findHot(pageable);
+    }
+
+    @GetMapping("/unanswered")
+    public Page<Question> getUnansweredQuestions(Pageable pageable) {
+        return questionsService.findUnanswered(pageable);
+    }
+
+    @GetMapping("/hot/random")
+    public Question getRandomHotQuestion() {
+        return questionsService.getRandomHotQuestion();
+    }
+
+    @GetMapping("/unanswered/random")
+    public Question getRandomUnansweredQuestion() {
+        return questionsService.getRandomUnansweredQuestion();
+    }
+
+    @GetMapping("/all/random")
+    public Question getRandomQuestion() {
+        return questionsService.getRandomQuestion();
+    }
+
+
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)

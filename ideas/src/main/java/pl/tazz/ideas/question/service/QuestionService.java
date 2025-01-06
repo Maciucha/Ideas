@@ -10,6 +10,7 @@ import pl.tazz.ideas.question.domain.model.Question;
 import pl.tazz.ideas.question.domain.repository.QuestionRepository;
 
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -19,6 +20,7 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
     private final QuestionMapper questionMapper;
+    private final Random random = new Random();
 
 
     @Transactional(readOnly = true)
@@ -79,5 +81,31 @@ public class QuestionService {
     @Transactional(readOnly = true)
     public List<Question> getLatestQuestions() {
         return questionRepository.findTop3ByOrderByCreatedDateDesc();
+    }
+
+    @Transactional(readOnly = true)
+    public Question getRandomHotQuestion() {
+        List<Question> hotQuestions = questionRepository.findListAllHot();
+        return getRandomQuestionFromList(hotQuestions);
+    }
+
+    @Transactional(readOnly = true)
+    public Question getRandomUnansweredQuestion() {
+        List<Question> unansweredQuestions = questionRepository.findListAllUnanswered();
+        return getRandomQuestionFromList(unansweredQuestions);
+    }
+
+    @Transactional(readOnly = true)
+    public Question getRandomQuestion() {
+        List<Question> allQuestions = questionRepository.findAll();
+        return getRandomQuestionFromList(allQuestions);
+    }
+
+    private Question getRandomQuestionFromList(List<Question> questions) {
+        if (questions == null || questions.isEmpty()) {
+            return null; // Brak pytań
+        }
+        int randomIndex = random.nextInt(questions.size());
+        return questions.get(randomIndex);
     }
 }
