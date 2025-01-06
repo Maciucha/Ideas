@@ -17,7 +17,7 @@
 </header>
 <main class="contact-main">
     <section>
-        <h2 th:text="#{contact.info}">Informacje kontaktowe</h2>
+        <h2 th:text="#{contact.info}">Contact:</h2>
         <div class="contact-info">
             <p><strong th:text="#{contact.company}">Firma:</strong> PHU Tazz Maciej Żok</p>
             <p><strong th:text="#{contact.nip}">NIP:</strong> 5992397692</p>
@@ -27,15 +27,15 @@
         </div>
     </section>
     <section>
-        <h2 th:text="#{contact.form}">Formularz kontaktowy</h2>
+        <h2 th:text="#{contact.form}">Contact Formular</h2>
         <form action="/send-message" method="post">
             <label for="name" th:text="#{contact.name}">Imię i nazwisko:</label><br>
             <input type="text" id="name" name="name" required><br><br>
             <label for="email" th:text="#{contact.email}">Email:</label><br>
             <input type="email" id="email" name="email" required><br><br>
-            <label for="message" th:text="#{contact.message}">Wiadomość:</label><br>
+            <label for="message" th:text="#{contact.message}">Message:</label><br>
             <textarea id="message" name="message" rows="5" required></textarea><br><br>
-            <button type="submit" th:text="#{contact.send}">Wyślij</button>
+            <button type="submit" th:text="#{contact.send}">Send</button>
         </form>
     </section>
 </main>
