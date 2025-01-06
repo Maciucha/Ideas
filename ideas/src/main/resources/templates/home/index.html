@@ -1,130 +1,15 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head(title)">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title th:text="${title}">Default template title</title>
-
-
-    <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-
-
-    <meta name="theme-color" content="#7952b3">
-
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
-
-
-    <!-- Custom styles for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="/css/blog.css" rel="stylesheet">
-    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="/css/style.css" rel="stylesheet" type="text/css">
-    <link href="/css/editor.css" rel="stylesheet" type="text/css">
-    <link href="/css/animate.css" rel="stylesheet" type="text/css">
-    <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="/css/responsive.css" rel="stylesheet" type="text/css">
-    <link href="/css/custom.css" rel="stylesheet">
-    <script src="/js/jquery-2.2.4.min.js"></script>
-    <script src="/js/editor.js"></script>
-
-</head>
+<head th:replace="~{includes/template :: head(title = '100 ideas')}"><title>Home Page</title></head>
 
 <body>
 
 <div th:fragment="header" class="container">
-    <header class="blog-header py-3">
-        <div class="row flex-nowrap justify-content-between align-items-center">
-            <div class="col-4 pt-1">
-                <a class="btn btn-sm btn-outline-secondary" href="/questions" th:text="#{text.all}">All</a>
-                <a class="btn btn-sm btn-outline-secondary" href="/questions/unanswered" th:text="#{menu.unanswered}">Unanswered</a>
-                <a class="btn btn-sm btn-outline-secondary" href="/questions/hot" th:text="#{menu.hot}">Hot</a>
-                <a class="btn btn-sm btn-outline-secondary" href="/questions/add" th:text="#{menu.add}">Ask</a></div>
-            <div class="col-4 text-center">
-                <a class="blog-header-logo text-dark" th:text="#{text.homePage}">100 Ideas!</a>
-            </div>
-            <div class="col-4 d-flex justify-content-end align-items-center">
-
-                <ul class="navbar-nav ml-auto">
-                    <!-- Language Dropdown Menu -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#" role="button">
-                            <span th:text="#{menu.change.language}">Change language</span>
-                            <span style="padding-left: 5px;">
-        <img src="/img/flag-en.png" alt="English" class="img-fluid" style="width: 20px;"/>
-                    </span>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="?lang=en">
-                                <img src="/img/flag-en.png" alt="English" class="img-fluid" style="width: 20px;"/>
-                                <span th:text="#{language.english}">English</span>
-                            </a>
-                            <a class="dropdown-item" href="?lang=pl">
-                                <img src="/img/flag-pl.png" alt="Polski" class="img-fluid" style="width: 20px;"/>
-                                <span th:text="#{language.polish}">Polski</span>
-                            </a>
-                            <a class="dropdown-item" href="?lang=de">
-                                <img src="/img/flag-de.png" alt="Deutsch" class="img-fluid" style="width: 20px;"/>
-                                <span th:text="#{language.german}">Deutsch</span>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-
-
-                <a class="link-secondary" href="/search" aria-label="Search">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
-                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img"
-                         viewBox="0 0 24 24"><title>Search</title>
-                        <circle cx="10.5" cy="10.5" r="7.5"/>
-                        <path d="M21 21l-5.2-5.2"/>
-                    </svg>
-                </a>
-
-                <div class="logged-user" th:if="${#authentication != null}">
-                    <div class="user-info">
-                        <p th:text="#{text.logged} + ': '">Logged</p>
-                        <p class="username" th:text="${#authentication.name}">User</p>
-                    </div>
-                    <form method="post" action="/logout">
-                        <button class="btn btn-sm btn-danger" type="submit" th:text="#{text.logout}">Wyloguj się</button>
-                    </form>
-                </div>
-
-                <a class="btn btn-sm btn-outline-secondary" th:if="${#authentication == null}" th:href="@{/user/login}"
-                   th:utext="#{menu.signup}">Sign up</a>
-            </div>
-        </div>
-    </header>
-
+    <th:block th:replace="~{includes/template :: header}" />
 
     <p></p>
     <p></p>
-    <div class="nav-scroller py-1 mb-2">
-        <nav class="navCategory">
-            <a th:each="category : ${categories}" th:text="${category.name}"
-               class="p-2 link-secondary"
-               th:href="@{'/categories/'+${category.id}}">
-            </a>
-        </nav>
-    </div>
+
 
     <div class="container">
         <div class="row">
@@ -190,19 +75,7 @@
     </div>
 
 
-<footer th:fragment="footer" class="blog-footer">
-    <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.
-    </p>
-    <p><a href="#">Back to top</a></p>
-    <p><a href="/admin" th:text="#{menu.admin}">Admin</a></p>
-
-    <!-- jQuery -->
-    <script src="/js/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="/admin/js/adminlte.min.js"></script>
-</footer>
+    <th:block th:replace="~{includes/template :: footer}" />
 
     <script>
         const updateSection = async (sectionId, apiUrl) => {
