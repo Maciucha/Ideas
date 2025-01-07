@@ -1,13 +1,11 @@
 package pl.tazz.ideas.question.domain.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -24,6 +22,14 @@ public class Answer {
     private String content;
     private String username;
     private String email;
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdDate;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdDate = LocalDateTime.now();
+    }
 
     @ManyToOne
     private Question question;

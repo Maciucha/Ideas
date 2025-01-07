@@ -32,10 +32,6 @@ public class AnswerService {
     public Answer createAnswer(UUID questionId, Answer answerRequest) {
         // Pobieramm pytanie z bazy danych
         Question question = questionRepository.getReferenceById(questionId);
-        if (question == null) {
-            throw new IllegalArgumentException("Pytanie o podanym ID nie istnieje.");
-        }
-
         // Powiązuję odpowiedź z pytaniem
         answerRequest.setQuestion(question);
         answerRepository.save(answerRequest);
@@ -56,5 +52,10 @@ public class AnswerService {
     @Transactional
     public void deleteAnswer(UUID answerId) {
         answerRepository.deleteById(answerId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Answer> getLatestAnswers() {
+        return  answerRepository.findTop5ByOrderByCreatedDateDesc();
     }
 }

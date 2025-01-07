@@ -37,6 +37,4 @@ public interface QuestionRepository extends JpaRepository<Question, UUID> {
     @Query("SELECT q FROM Question q WHERE SIZE(q.answers) = 0")
     List<Question> findListAllUnanswered();
 
-
-
 }
