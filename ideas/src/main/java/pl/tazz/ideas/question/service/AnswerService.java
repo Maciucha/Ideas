@@ -56,6 +56,6 @@ public class AnswerService {
 
     @Transactional(readOnly = true)
     public List<Answer> getLatestAnswers() {
-        return  answerRepository.findTop5ByOrderByCreatedDateDesc();
+        return  answerRepository.findTop10ByOrderByCreatedDateDesc();
     }
 }

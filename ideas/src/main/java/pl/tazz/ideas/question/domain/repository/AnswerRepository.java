@@ -11,5 +11,5 @@ import java.util.UUID;
 public interface AnswerRepository extends JpaRepository<Answer, UUID> {
     List<Answer> findByQuestionId(UUID questionId);
 
-    List<Answer> findTop5ByOrderByCreatedDateDesc();
+    List<Answer> findTop10ByOrderByCreatedDateDesc();
 }

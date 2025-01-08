@@ -80,7 +80,7 @@ public class QuestionService {
 
     @Transactional(readOnly = true)
     public List<Question> getLatestQuestions() {
-        return questionRepository.findTop3ByOrderByCreatedDateDesc();
+        return questionRepository.findTop10ByOrderByCreatedDateDesc();
     }
 
     @Transactional(readOnly = true)

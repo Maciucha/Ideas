@@ -9,64 +9,109 @@
 
     <th:block th:replace="~{admin/template :: sidebar}" />
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
 
-        <!-- Main content -->
+    <div class="content-wrapper">
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-header-tabs">Recent Questions</h4>
-
+                                <h4 class="card-header-tabs">Latest Questions</h4>
                                 <p class="card-text">
                                     <br>
-                                    Latest 10 Questions
+                                <table>
+                                    <tbody>
+                                    <tr th:each="question : ${latestQuestions}">
+
+                                        <td><input type="checkbox" th:id="'question-' + ${question.id}" th:value="${question.id}" class="checkbox"></td>
+                                        <td th:text="${question.name}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                                 </p>
 
-                                <a href="#" class="card-link">Edit</a>
-                                <a href="#" class="card-link">Delete</a>
+                                <a href="#" class="card-link" id="editButton">Edit</a>
+                                <a href="#" class="card-link" id="deleteButton">Delete</a>
                             </div>
                         </div>
-
-
                     </div>
-                    <!-- /.col-md-6 -->
+
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-header-tabs">Recent Answers</h4>
-
+                                <h4 class="card-header-tabs">Latest Answers</h4>
                                 <p class="card-text">
                                     <br>
-                                    Latest 10 Answers
+                                <table>
+                                    <tbody>
+
+                                    <tr th:each="answer : ${latestAnswers}">
+
+                                        <td><input type="checkbox" th:id="'answer-' + ${answer.id}" th:value="${answer.id}" class="checkbox"></td>
+                                        <td th:text="${answer.content}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                                 </p>
 
-                                <a href="#" class="card-link">Edit</a>
-                                <a href="#" class="card-link">Delete</a>
+                                <a href="#" class="card-link" id="editAnswerButton">Edit</a>
+                                <a href="#" class="card-link" id="deleteAnswerButton">Delete</a>
                             </div>
                         </div>
                     </div>
-                    <!-- /.col-md-6 -->
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+            </div>
         </div>
-        <!-- /.content -->
+
+
+        <script>
+            document.getElementById("editButton").addEventListener("click", function() {
+                const selected = document.querySelectorAll('input[type="checkbox"]:checked');
+                if (selected.length > 0) {
+                    const ids = Array.from(selected).map(checkbox => checkbox.value);
+                    alert("Edit these questions: " + ids.join(", "));
+                    // Tutaj dodać logikę edycji na podstawie wybranych identyfikatorów
+                } else {
+                    alert("Please select at least one question to edit.");
+                }
+            });
+
+            document.getElementById("deleteButton").addEventListener("click", function() {
+                const selected = document.querySelectorAll('input[type="checkbox"]:checked');
+                if (selected.length > 0) {
+                    const ids = Array.from(selected).map(checkbox => checkbox.value);
+                    alert("Delete these questions: " + ids.join(", "));
+                    // Tutaj dodać logikę usuwania na podstawie wybranych identyfikatorów
+                } else {
+                    alert("Please select at least one question to delete.");
+                }
+            });
+
+            document.getElementById("editAnswerButton").addEventListener("click", function() {
+                const selected = document.querySelectorAll('input[type="checkbox"]:checked');
+                if (selected.length > 0) {
+                    const ids = Array.from(selected).map(checkbox => checkbox.value);
+                    alert("Edit these answers: " + ids.join(", "));
+                    // Tutaj dodać logikę edycji na podstawie wybranych identyfikatorów
+                } else {
+                    alert("Please select at least one answer to edit.");
+                }
+            });
+
+            document.getElementById("deleteAnswerButton").addEventListener("click", function() {
+                const selected = document.querySelectorAll('input[type="checkbox"]:checked');
+                if (selected.length > 0) {
+                    const ids = Array.from(selected).map(checkbox => checkbox.value);
+                    alert("Delete these answers: " + ids.join(", "));
+                    // Tutaj dodać logikę usuwania na podstawie wybranych identyfikatorów
+                } else {
+                    alert("Please select at least one answer to delete.");
+                }
+            });
+        </script>
     </div>
-    <!-- /.content-wrapper -->
+
 
     <th:block th:replace="~{admin/template :: righbar}" />
 

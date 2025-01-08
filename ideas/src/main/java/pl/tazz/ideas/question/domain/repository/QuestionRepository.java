@@ -21,7 +21,7 @@ public interface QuestionRepository extends JpaRepository<Question, UUID> {
     @Query("SELECT q FROM Question q WHERE SIZE(q.answers) = 0")
     Page<Question> findUnanswered(Pageable pageable);
 
-    List<Question> findTop3ByOrderByCreatedDateDesc();
+    List<Question> findTop10ByOrderByCreatedDateDesc();
 
     // Wyszukiwanie z zapytaniem w SQL
     @Query(

@@ -23,7 +23,7 @@ public class AdminViewController {
     @GetMapping
     public String indexView(Model model) {
         model.addAttribute("latestQuestions", questionService.getLatestQuestions());
-        model.addAttribute("latestAnswer", answerService.getLatestAnswers());
+        model.addAttribute("latestAnswers", answerService.getLatestAnswers());
         return "admin/index";
     }
 
