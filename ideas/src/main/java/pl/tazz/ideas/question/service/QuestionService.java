@@ -84,6 +84,16 @@ public class QuestionService {
     }
 
     @Transactional(readOnly = true)
+    public List<Question> getLatest4Questions() {
+        return questionRepository.findTop4ByOrderByCreatedDateDesc();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Question> getLatest3Questions() {
+        return questionRepository.findTop3ByOrderByCreatedDateDesc();
+    }
+
+    @Transactional(readOnly = true)
     public Question getRandomHotQuestion() {
         List<Question> hotQuestions = questionRepository.findListAllHot();
         return getRandomQuestionFromList(hotQuestions);

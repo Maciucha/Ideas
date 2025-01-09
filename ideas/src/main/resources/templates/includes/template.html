@@ -324,7 +324,7 @@
                         </h3>
 
                         <!-- Pętla wyświetlająca 3 ostatnio dodane pytania -->
-                        <div th:each="question : ${latestQuestions}">
+                        <div th:each="question : ${latest3Questions}">
                             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-50 position-relative">
                                 <div class="col p-4 d-flex flex-column position-static">
                                     <h5 class="mb-0" th:text="${question.name}"></h5>

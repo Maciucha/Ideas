@@ -38,7 +38,7 @@ public class QuestionViewController extends IdeasCommonViewController {
         PageRequest pageRequest = PageRequest.of(page - 1, ideasConfiguration.getPagingPageSize());
         Page<Question> questionsPage = questionService.getQuestions(pageRequest);
 
-        model.addAttribute("latestQuestions", questionService.getLatestQuestions());
+        model.addAttribute("latest3Questions", questionService.getLatest3Questions());
         model.addAttribute("questionsPage", questionsPage);
         ContorllerUtils.paging(model, questionsPage);
         addGlobalAttributes(model);
@@ -51,7 +51,7 @@ public class QuestionViewController extends IdeasCommonViewController {
     public String singleView(@PathVariable UUID id, Model model) {
         List<Answer> answers = answersService.getAnswers(id);
 
-        model.addAttribute("latestQuestions", questionService.getLatestQuestions());
+        model.addAttribute("latest3Questions", questionService.getLatest3Questions());
         model.addAttribute("question", questionService.getQuestion(id));
         model.addAttribute("answers", answers);
         addGlobalAttributes(model);
@@ -66,7 +66,7 @@ public class QuestionViewController extends IdeasCommonViewController {
         PageRequest pageRequest = PageRequest.of(page - 1, ideasConfiguration.getPagingPageSize());
         Page<Question> questionsPage = questionService.findHot(pageRequest);
 
-        model.addAttribute("latestQuestions", questionService.getLatestQuestions());
+        model.addAttribute("latest3Questions", questionService.getLatest3Questions());
         model.addAttribute("questionsPage", questionsPage);
         ContorllerUtils.paging(model, questionsPage);
         addGlobalAttributes(model);
@@ -80,7 +80,7 @@ public class QuestionViewController extends IdeasCommonViewController {
         PageRequest pageRequest = PageRequest.of(page - 1, ideasConfiguration.getPagingPageSize());
         Page<Question> questionsPage = questionService.findUnanswered(pageRequest);
 
-        model.addAttribute("latestQuestions", questionService.getLatestQuestions());
+        model.addAttribute("latest3Questions", questionService.getLatest3Questions());
         model.addAttribute("questionsPage", questionsPage);
         ContorllerUtils.paging(model, questionsPage);
         addGlobalAttributes(model);

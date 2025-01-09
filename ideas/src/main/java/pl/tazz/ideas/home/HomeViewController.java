@@ -19,7 +19,7 @@ public class HomeViewController extends IdeasCommonViewController {
 
     @GetMapping("")
     public String homeView(Model model) {
-        model.addAttribute("latestQuestions", questionService.getLatestQuestions());
+        model.addAttribute("latest4Questions", questionService.getLatest4Questions());
         addGlobalAttributes(model);
         return "home/index";
     }

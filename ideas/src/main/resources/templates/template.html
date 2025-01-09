@@ -271,6 +271,27 @@
                         100 Ideas is a space where you can ask questions and receive answers from the community. This way, you have the opportunity to engage in discussions with other participants, exchange ideas, and share knowledge. Join the discussion and find answers to the questions that matter to you!                    </p>
                 </div>
 
+                <div th:fragment="latest" class="row g-5">
+                    <div class="col-md-8">
+                        <h3 class="pb-4 mb-4 fst-italic border-bottom" th:text="#{text.recentlyAdded}">
+                            Recently Added
+                        </h3>
+
+                        <!-- Pętla wyświetlająca 3 ostatnio dodane pytania -->
+                        <div th:each="question : ${latest4Questions}">
+                            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-50 position-relative">
+                                <div class="col p-4 d-flex flex-column position-static">
+                                    <h5 class="mb-0" th:text="${question.name}"></h5>
+                                    <!--                                    <div class="mb-1 text-muted" th:text="${#dates.format(question.createdDate, 'dd MMM yyyy')}"></div>-->
+                                    <p class="card-text mb-auto" th:text="${question.content}"></p>
+                                    <a th:href="@{'/questions/' + ${question.id}}" class="stretched-link" th:text="#{text.continueReading}">Continue reading</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="p-4">
                     <h4 class="fst-italic" th:text="#{menu.archives}">Archives</h4>
                     <ol class="list-unstyled mb-0">

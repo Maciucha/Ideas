@@ -23,6 +23,10 @@ public interface QuestionRepository extends JpaRepository<Question, UUID> {
 
     List<Question> findTop10ByOrderByCreatedDateDesc();
 
+    List<Question> findTop4ByOrderByCreatedDateDesc();
+
+    List<Question> findTop3ByOrderByCreatedDateDesc();
+
     // Wyszukiwanie z zapytaniem w SQL
     @Query(
             value = "SELECT * FROM questions q WHERE UPPER(q.name) LIKE UPPER(CONCAT('%', :query, '%'))",
