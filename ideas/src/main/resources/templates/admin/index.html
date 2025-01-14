@@ -51,42 +51,43 @@
                     </div>
 
 
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
 
-                                <h4 class="card-header-tabs" th:text="#{menu.answers}">Answers</h4>
-                                <p class="card-text">
-                                    <br>
+                                    <h4 class="card-header-tabs" th:text="#{menu.answers}">Answers</h4>
+                                    <p class="card-text">
+                                        <br>
 
-                                <table>
-                                <tbody>
+                                    <table>
+                                        <tbody>
+                                        <tr th:each="answer, it : ${answers}">
+                                            <td th:text="${it.index + 1}"></td>
+                                            <td class="truncate" th:text="${answer.content}"></td>
+                                            <td>
+                                                <a th:href="@{'/admin/answers/'+${answer.id}}"
+                                                   class="btn btn-info btn-sm">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                    <span th:text="#{button.edit}"></span>
+                                                </a>
+                                                <a th:href="@{'/admin/answers/'+${answer.id}+'/delete'}"
+                                                   class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i>
+                                                    <span th:text="#{button.delete}"></span>
+                                                </a>
+                                            </td>
+                                            <td class="text-left" style="padding-left: 20px;">
+                                                <span th:text="#{text.fromQuestion} + ': '"></span>
+                                                <a th:href="@{'/questions/' + ${answer.question.id}}"
+                                                   th:text="${answer.question.name}"></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
 
-
-                                </tbody>
-                                <tbody>
-                                <tr th:each="answer, it : ${answers}">
-                                    <td th:text="${it.index}+1"></td>
-                                    <td class="truncate" th:text="${answer.content}"></td>
-                                    <td>
-                                        <a th:href="@{'/admin/answers/'+${answer.id}}"
-                                           class="btn btn-info btn-sm">
-                                            <i class="fas fa-pencil-alt"></i>
-                                            <span th:text="#{button.edit}"></span>
-                                        </a>
-                                        <a th:href="@{'/admin/answers/'+${answer.id}+'/delete'}"
-                                           class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash"></i>
-                                            <span th:text="#{button.delete}"></span>
-                                        </a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                                </table>
-
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
