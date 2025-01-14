@@ -8,12 +8,13 @@ import lombok.Data;
 public class Message {
     private String title;
     private String content;
+    private String type;
 
     public static Message info(String msg) {
-        return new Message("Info", msg);
+        return new Message("Info", msg, "info");
     }
 
     public static Message error(String msg) {
-        return new Message("Error", msg);
+        return new Message("Error", msg, "error");
     }
 }

@@ -3,114 +3,100 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{admin/template :: head(title = '100 ideas - Admin')}"><title>Administration</title></head>
 <body class="hold-transition sidebar-mini">
+
 <div class="wrapper">
-
     <th:block th:replace="~{admin/template :: navbar}" />
-
     <th:block th:replace="~{admin/template :: sidebar}" />
-
     br
 
     <div class="content-wrapper">
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-header-tabs">Latest Questions</h4>
+
+                                <h4 class="card-header-tabs" th:text="#{menu.questions}">Questions</h4>
                                 <p class="card-text">
                                     <br>
-                                <table>
-                                    <tbody>
-                                    <tr th:each="question : ${latestQuestions}">
 
-                                        <td><input type="checkbox" th:id="'question-' + ${question.id}" th:value="${question.id}" class="checkbox"></td>
-                                        <td th:text="${question.name}"></td>
+                            <table>
+                                <tbody>
+                                    <tr th:each="question, it : ${questions}">
+                                        <td th:text="${it.index}+1"></td>
+                                        <td class="truncate" th:text="${question.name}"></td>
+                                        <td>
+                                            <a th:href="@{'/questions/'+${question.id}}"
+                                               class="btn btn-primary btn-sm">
+                                                <i class="fas fa-folder"></i>
+                                                <span th:text="#{button.view}"></span>
+                                            </a>
+                                            <a th:href="@{'/admin/questions/'+${question.id}}"
+                                               class="btn btn-info btn-sm">
+                                                <i class="fas fa-pencil-alt"></i>
+                                                <span th:text="#{button.edit}"></span>
+                                            </a>
+                                            <a th:href="@{'/admin/questions/'+${question.id}+'/delete'}"
+                                               class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash"></i>
+                                                <span th:text="#{button.delete}"></span>
+                                            </a>
+                                        </td>
                                     </tr>
-                                    </tbody>
-                                </table>
-                                <br>
+                                </tbody>
+                            </table>
 
-                                <a href="#" class="card-link" id="editButton">Edit</a>
-                                <a href="#" class="card-link" id="deleteButton">Delete</a>
-                            </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-6">
+
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-header-tabs">Latest Answers</h4>
+
+                                <h4 class="card-header-tabs" th:text="#{menu.answers}">Answers</h4>
                                 <p class="card-text">
                                     <br>
+
                                 <table>
-                                    <tbody>
+                                <tbody>
 
-                                    <tr th:each="answer : ${latestAnswers}">
 
-                                        <td><input type="checkbox" th:id="'answer-' + ${answer.id}" th:value="${answer.id}" class="checkbox"></td>
-                                        <td th:text="${answer.content}"></td>
-                                    </tr>
-                                    </tbody>
+                                </tbody>
+                                <tbody>
+                                <tr th:each="answer, it : ${answers}">
+                                    <td th:text="${it.index}+1"></td>
+                                    <td class="truncate" th:text="${answer.content}"></td>
+                                    <td>
+                                        <a th:href="@{'/answers/'+${answer.id}}"
+                                           class="btn btn-primary btn-sm">
+                                            <i class="fas fa-folder"></i>
+                                            <span th:text="#{button.view}"></span>
+                                        </a>
+                                        <a th:href="@{'/admin/answers/'+${answer.id}}"
+                                           class="btn btn-info btn-sm">
+                                            <i class="fas fa-pencil-alt"></i>
+                                            <span th:text="#{button.edit}"></span>
+                                        </a>
+                                        <a th:href="@{'/admin/answers/'+${answer.id}+'/delete'}"
+                                           class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                            <span th:text="#{button.delete}"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
                                 </table>
-                                <br>
 
-                                <a href="#" class="card-link" id="editAnswerButton">Edit</a>
-                                <a href="#" class="card-link" id="deleteAnswerButton">Delete</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-
-        <script>
-            document.getElementById("editButton").addEventListener("click", function() {
-                const selected = document.querySelectorAll('input[type="checkbox"]:checked');
-                if (selected.length > 0) {
-                    const ids = Array.from(selected).map(checkbox => checkbox.value);
-                    alert("Edit these questions: " + ids.join(", "));
-                    // Tutaj dodać logikę edycji na podstawie wybranych identyfikatorów
-                } else {
-                    alert("Please select at least one question to edit.");
-                }
-            });
-
-            document.getElementById("deleteButton").addEventListener("click", function() {
-                const selected = document.querySelectorAll('input[type="checkbox"]:checked');
-                if (selected.length > 0) {
-                    const ids = Array.from(selected).map(checkbox => checkbox.value);
-                    alert("Delete these questions: " + ids.join(", "));
-                    // Tutaj dodać logikę usuwania na podstawie wybranych identyfikatorów
-                } else {
-                    alert("Please select at least one question to delete.");
-                }
-            });
-
-            document.getElementById("editAnswerButton").addEventListener("click", function() {
-                const selected = document.querySelectorAll('input[type="checkbox"]:checked');
-                if (selected.length > 0) {
-                    const ids = Array.from(selected).map(checkbox => checkbox.value);
-                    alert("Edit these answers: " + ids.join(", "));
-                    // Tutaj dodać logikę edycji na podstawie wybranych identyfikatorów
-                } else {
-                    alert("Please select at least one answer to edit.");
-                }
-            });
-
-            document.getElementById("deleteAnswerButton").addEventListener("click", function() {
-                const selected = document.querySelectorAll('input[type="checkbox"]:checked');
-                if (selected.length > 0) {
-                    const ids = Array.from(selected).map(checkbox => checkbox.value);
-                    alert("Delete these answers: " + ids.join(", "));
-                    // Tutaj dodać logikę usuwania na podstawie wybranych identyfikatorów
-                } else {
-                    alert("Please select at least one answer to delete.");
-                }
-            });
-        </script>
     </div>
 
 

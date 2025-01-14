@@ -9,3 +9,17 @@
 .sort-desc:after{
     content: " ↓";
 }
+
+.truncate {
+     max-width: 300px;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+ }
+
+.wrap {
+    max-width: 300px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+

@@ -1,6 +1,8 @@
 package pl.tazz.ideas.question.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.tazz.ideas.question.domain.model.Answer;
@@ -17,6 +19,10 @@ public class AnswerService {
 
     private final AnswerRepository answerRepository;
     private final QuestionRepository questionRepository;
+
+    public Page<Answer> getPageableAnswers(Pageable pageable) {
+        return answerRepository.findAll(pageable);
+    }
 
     @Transactional(readOnly = true)
     public List<Answer> getAnswers(UUID questionId) {
@@ -56,6 +62,6 @@ public class AnswerService {
 
     @Transactional(readOnly = true)
     public List<Answer> getLatestAnswers() {
-        return  answerRepository.findTop10ByOrderByCreatedDateDesc();
+        return answerRepository.findTop10ByOrderByCreatedDateDesc();
     }
 }
