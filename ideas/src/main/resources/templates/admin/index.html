@@ -27,11 +27,6 @@
                                         <td th:text="${it.index}+1"></td>
                                         <td class="truncate" th:text="${question.name}"></td>
                                         <td>
-                                            <a th:href="@{'/questions/'+${question.id}}"
-                                               class="btn btn-primary btn-sm">
-                                                <i class="fas fa-folder"></i>
-                                                <span th:text="#{button.view}"></span>
-                                            </a>
                                             <a th:href="@{'/admin/questions/'+${question.id}}"
                                                class="btn btn-info btn-sm">
                                                 <i class="fas fa-pencil-alt"></i>
@@ -69,11 +64,6 @@
                                     <td th:text="${it.index}+1"></td>
                                     <td class="truncate" th:text="${answer.content}"></td>
                                     <td>
-                                        <a th:href="@{'/answers/'+${answer.id}}"
-                                           class="btn btn-primary btn-sm">
-                                            <i class="fas fa-folder"></i>
-                                            <span th:text="#{button.view}"></span>
-                                        </a>
                                         <a th:href="@{'/admin/answers/'+${answer.id}}"
                                            class="btn btn-info btn-sm">
                                             <i class="fas fa-pencil-alt"></i>
