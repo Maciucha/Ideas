@@ -27,17 +27,17 @@
                                         <td th:text="${it.index}+1"></td>
                                         <td class="truncate" th:text="${question.name}"></td>
                                         <td>
-                                            <a th:href="@{'/questions/'+${question.id}}"
+                                            <a th:href="@{'/question/'+${question.id}}"
                                                class="btn btn-primary btn-sm">
                                                 <i class="fas fa-folder"></i>
                                                 <span th:text="#{button.view}"></span>
                                             </a>
-                                            <a th:href="@{'/admin/questions/'+${question.id}}"
+                                            <a th:href="@{'/admin/question/'+${question.id}}"
                                                class="btn btn-info btn-sm">
                                                 <i class="fas fa-pencil-alt"></i>
                                                 <span th:text="#{button.edit}"></span>
                                             </a>
-                                            <a th:href="@{'/admin/questions/'+${question.id}+'/delete'}"
+                                            <a th:href="@{'/admin/question/'+${question.id}+'/delete'}"
                                                class="btn btn-danger btn-sm">
                                                 <i class="fas fa-trash"></i>
                                                 <span th:text="#{button.delete}"></span>
@@ -65,12 +65,12 @@
                                             <td th:text="${it.index + 1}"></td>
                                             <td class="truncate" th:text="${answer.content}"></td>
                                             <td>
-                                                <a th:href="@{'/admin/answers/'+${answer.id}}"
+                                                <a th:href="@{'/admin/answer/'+${answer.id}}"
                                                    class="btn btn-info btn-sm">
                                                     <i class="fas fa-pencil-alt"></i>
                                                     <span th:text="#{button.edit}"></span>
                                                 </a>
-                                                <a th:href="@{'/admin/answers/'+${answer.id}+'/delete'}"
+                                                <a th:href="@{'/admin/answer/'+${answer.id}+'/delete'}"
                                                    class="btn btn-danger btn-sm">
                                                     <i class="fas fa-trash"></i>
                                                     <span th:text="#{button.delete}"></span>

@@ -9,6 +9,8 @@
 
     <th:block th:replace="~{admin/template :: sidebar}" />
 
+
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -32,7 +34,7 @@
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
-                <form method="post" th:object="${category}">
+                <form method="post" th:object="${answer}">
                     <div class="error" th:if="${#fields.hasAnyErrors()}">
                         <ul>
                             <li th:each="err : ${#fields.allErrors()}" th:text="${err}"/>
@@ -43,7 +45,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">100 ideas - Edycja pojedynczej kategorii</h3>
+                                    <h3 class="card-title">100 ideas - Edycja odpowiedzi</h3>
 
                                     <div class="card-tools">
                                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -64,14 +66,14 @@
                                 <!-- general form elements -->
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Category</h3>
+                                        <h3 class="card-title" th:text="#{button.answer}">Answer</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="categoryName" th:text="#{menu.name}">Name</label>
-                                            <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
-                                            <input th:field="*{name}" type="text" class="form-control" id="categoryName" placeholder="Category name" />
+                                            <label for="answerName" th:text="#{menu.name}">Name</label>
+                                            <span class="error" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Name Error</span>
+                                            <input th:field="*{content}" type="text" class="form-control" id="answerName" placeholder="Answer name" />
                                             <input th:field="*{id}" type="hidden" />
                                         </div>
                                     </div>

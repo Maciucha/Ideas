@@ -32,9 +32,13 @@ public class AnswerViewController extends IdeasCommonViewController {
 
 
     @GetMapping({"/", ""})
-    public String indexView(@RequestParam(name = "page", defaultValue = "1") Integer page, Model model) {
+    public String indexView(
+            @RequestParam(name = "page", defaultValue = "1") Integer page,
+            @RequestParam(name = "s", required = false) String search,
+            Model model
+    ) {
         PageRequest pageRequest = PageRequest.of(page - 1, ideasConfiguration.getPagingPageSize());
-        Page<Question> questionsPage = questionService.getQuestions(pageRequest);
+        Page<Question> questionsPage = questionService.getQuestions(search, pageRequest);
 
         model.addAttribute("questionsPage", questionsPage);
         ContorllerUtils.paging(model, questionsPage);

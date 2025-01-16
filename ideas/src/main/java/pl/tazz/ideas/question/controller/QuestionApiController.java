@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.tazz.ideas.question.service.QuestionService;
 import pl.tazz.ideas.question.domain.model.Question;
@@ -19,8 +20,10 @@ public class QuestionApiController {
     private final QuestionService questionsService;
 
     @GetMapping
-    Page<Question> getQuestions(Pageable pageable) {
-        return questionsService.getQuestions(pageable);
+    Page<Question> getQuestions(
+            @RequestParam(name = "s", required = false) String search,
+            Pageable pageable) {
+        return questionsService.getQuestions(search, pageable);
     }
 
 

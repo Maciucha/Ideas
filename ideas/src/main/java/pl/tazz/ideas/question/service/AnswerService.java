@@ -20,7 +20,8 @@ public class AnswerService {
     private final AnswerRepository answerRepository;
     private final QuestionRepository questionRepository;
 
-    public Page<Answer> getPageableAnswers(Pageable pageable) {
+
+    public Page<Answer> getPageableAnswers(String search, Pageable pageable) {
         return answerRepository.findAll(pageable);
     }
 
