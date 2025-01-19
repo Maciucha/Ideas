@@ -86,7 +86,7 @@ public class AnswerAdminViewController {
             return "admin/answer/edit";
         }
 
-        return "redirect:/admin/answer";
+        return "redirect:/admin";
     }
 
 
@@ -95,6 +95,6 @@ public class AnswerAdminViewController {
         answerService.deleteAnswer(id);
         ra.addFlashAttribute("message", Message.info("Odpowiedź usunięta."));
 
-        return "redirect:/admin/answer";
+        return "redirect:/admin";
     }
 }

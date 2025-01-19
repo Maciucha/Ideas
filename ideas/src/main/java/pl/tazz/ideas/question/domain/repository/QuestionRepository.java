@@ -27,6 +27,9 @@ public interface QuestionRepository extends JpaRepository<Question, UUID> {
 
     List<Question> findTop3ByOrderByCreatedDateDesc();
 
+    Page<Question> findByNameContainingIgnoreCase(String name, Pageable pageable);
+
+
     // Wyszukiwanie z zapytaniem w SQL
     @Query(
             value = "SELECT * FROM questions q WHERE UPPER(q.name) LIKE UPPER(CONCAT('%', :query, '%'))",

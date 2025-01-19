@@ -47,7 +47,21 @@
                                 </tbody>
                             </table>
 
-                        </div>
+<!--                                <nav aria-label="Page navigation">-->
+<!--                                    <ul class="pagination">-->
+<!--                                        <li class="page-item" th:classappend="${pageNumber == 1} ? 'disabled'">-->
+<!--                                            <a class="page-link" th:href="@{'/admin?page=' + (${currentPage} - 1)}" th:text="#{text.previous}">Previous</a>-->
+<!--                                        </li>-->
+<!--                                        <li class="page-item" th:each="i : ${#numbers.sequence(1, totalQuestionsPages)}" th:classappend="${i == currentPage} ? 'active'">-->
+<!--                                            <a class="page-link" th:href="@{'/admin?page=' + i}" th:text="${i}"></a>-->
+<!--                                        </li>-->
+<!--                                        <li class="page-item" th:classappend="${pageNumber == totalQuestionsPages} ? 'disabled'">-->
+<!--                                            <a class="page-link" th:href="@{'/admin?page=' + (${currentPage + 1})}" th:text="#{text.next}">Next</a>-->
+<!--                                        </li>-->
+<!--                                    </ul>-->
+<!--                                </nav>-->
+
+                            </div>
                     </div>
 
 
@@ -84,6 +98,21 @@
                                         </tr>
                                         </tbody>
                                     </table>
+
+<!--                                    <nav aria-label="Page navigation">-->
+<!--                                        <ul class="pagination">-->
+<!--                                            <li class="page-item" th:classappend="${pageNumber == 1} ? 'disabled'">-->
+<!--                                                <a class="page-link" th:href="@{'/admin/questions?page=' + (${pageNumber} - 1)}">Previous</a>-->
+<!--                                            </li>-->
+<!--                                            <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${i == pageNumber} ? 'active'">-->
+<!--                                                <a class="page-link" th:href="@{'/admin/questions?page=' + i}" th:text="${i}"></a>-->
+<!--                                            </li>-->
+<!--                                            <li class="page-item" th:classappend="${pageNumber == totalPages} ? 'disabled'">-->
+<!--                                                <a class="page-link" th:href="@{'/admin/questions?page=' + (${currentPage + 1})}">Next</a>-->
+<!--                                            </li>-->
+<!--                                        </ul>-->
+<!--                                    </nav>-->
+
 
                                 </div>
                             </div>

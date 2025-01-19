@@ -71,9 +71,9 @@
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="answerName" th:text="#{menu.name}">Name</label>
+                                            <label for="answerContent" th:text="#{menu.name}">Name</label>
                                             <span class="error" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Name Error</span>
-                                            <input th:field="*{content}" type="text" class="form-control" id="answerName" placeholder="Answer name" />
+                                            <input th:field="*{content}" type="text" class="form-control" id="answerContent" placeholder="Answer content" />
                                             <input th:field="*{id}" type="hidden" />
                                         </div>
                                     </div>
