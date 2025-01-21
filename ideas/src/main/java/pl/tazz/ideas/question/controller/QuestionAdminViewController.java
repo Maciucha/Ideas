@@ -86,7 +86,7 @@ public class QuestionAdminViewController {
             return "admin/question/edit";
         }
 
-        return "redirect:/admin/question";
+        return "redirect:/admin";
     }
 
 
