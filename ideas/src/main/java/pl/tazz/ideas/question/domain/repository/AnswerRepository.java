@@ -12,6 +12,8 @@ import java.util.UUID;
 @Repository
 public interface AnswerRepository extends JpaRepository<Answer, UUID> {
 
+    Page<Answer> findByNameContainingIgnoreCase(String name, Pageable pageable);
+
     List<Answer> findByQuestionId(UUID questionId);
 
     List<Answer> findTop10ByOrderByCreatedDateDesc();

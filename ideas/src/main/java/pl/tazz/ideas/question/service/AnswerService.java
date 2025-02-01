@@ -21,8 +21,13 @@ public class AnswerService {
     private final QuestionRepository questionRepository;
 
 
-    public Page<Answer> getPageableAnswers(String search, Pageable pageable) {
-        return answerRepository.findAll(pageable);
+    @Transactional(readOnly = true)
+    public Page<Answer> getAnswers(String search, Pageable pageable) {
+        if (search == null) {
+            return answerRepository.findAll(pageable);
+        } else {
+            return answerRepository.findByNameContainingIgnoreCase(search, pageable);
+        }
     }
 
     @Transactional(readOnly = true)

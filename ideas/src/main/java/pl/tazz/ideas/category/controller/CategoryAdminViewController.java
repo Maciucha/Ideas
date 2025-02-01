@@ -48,7 +48,7 @@ public class CategoryAdminViewController {
         model.addAttribute("categoriesPage", categoriesPage);
         model.addAttribute("search", search);
         model.addAttribute("reverseSort", reverseSort);
-        ContorllerUtils.paging(model, categoriesPage);
+        ContorllerUtils.paging(model, categoriesPage, "");
 
         return "/admin/category/index";
     }

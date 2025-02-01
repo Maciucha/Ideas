@@ -24,7 +24,7 @@ public class QuestionService {
 
 
     @Transactional(readOnly = true)
-    public Page<Question> getQuestions(String search, Pageable pageable) {
+public Page<Question> getQuestions(String  search, Pageable pageable) {
         return questionRepository.findAll(pageable);
     }
 

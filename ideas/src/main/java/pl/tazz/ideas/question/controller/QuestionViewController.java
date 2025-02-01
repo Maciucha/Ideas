@@ -45,7 +45,7 @@ public class QuestionViewController extends IdeasCommonViewController {
 
         model.addAttribute("latest3Questions", questionService.getLatest3Questions());
         model.addAttribute("questionsPage", questionsPage);
-        ContorllerUtils.paging(model, questionsPage);
+        ContorllerUtils.paging(model, questionsPage, "questionsPageNumbers");
         addGlobalAttributes(model);
 
         return "question/index";
@@ -73,7 +73,7 @@ public class QuestionViewController extends IdeasCommonViewController {
 
         model.addAttribute("latest3Questions", questionService.getLatest3Questions());
         model.addAttribute("questionsPage", questionsPage);
-        ContorllerUtils.paging(model, questionsPage);
+        ContorllerUtils.paging(model, questionsPage,"questionsPageNumbers");
         addGlobalAttributes(model);
 
         return "question/index";
@@ -87,7 +87,7 @@ public class QuestionViewController extends IdeasCommonViewController {
 
         model.addAttribute("latest3Questions", questionService.getLatest3Questions());
         model.addAttribute("questionsPage", questionsPage);
-        ContorllerUtils.paging(model, questionsPage);
+        ContorllerUtils.paging(model, questionsPage, "questionsPageNumbers");
         addGlobalAttributes(model);
 
         return "question/index";

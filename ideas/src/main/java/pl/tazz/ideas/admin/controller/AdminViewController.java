@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.tazz.ideas.common.controller.ContorllerUtils;
 import pl.tazz.ideas.question.domain.model.Answer;
 import pl.tazz.ideas.question.domain.model.Question;
 import pl.tazz.ideas.question.service.AnswerService;
@@ -33,22 +34,34 @@ public class AdminViewController {
             @RequestParam(name = "s", required = false) String search,
             @RequestParam(name = "field", required = false, defaultValue = "id") String field,
             @RequestParam(name = "direction", required = false, defaultValue = "asc") String direction,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(name = "qPage", defaultValue = "0") int qPage,
+            @RequestParam(name = "qSize", defaultValue = "10") int qSize,
+            @RequestParam(name = "aPage", defaultValue = "0") int aPage,
+            @RequestParam(name = "aSize", defaultValue = "10") int aSize,
             Model model
     ) {
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.fromString(direction), field);
+        // Paginacja dla pytań
+        Pageable questionsPageable = PageRequest.of(qPage, qSize, Sort.Direction.fromString(direction), field);
+        Page<Question> questionsPage = questionService.getQuestions(search, questionsPageable);
 
-        Page<Question> questionsPage = questionService.getQuestions(search, pageable);
-        Page<Answer> answersPage = answerService.getPageableAnswers(search, pageable);
-        model.addAttribute("answers", answersPage.getContent());
+        // Paginacja dla odpowiedzi
+        Pageable answersPageable = PageRequest.of(aPage, aSize, Sort.Direction.fromString(direction), field);
+        Page<Answer> answersPage = answerService.getAnswers(search, answersPageable);
+
         model.addAttribute("questions", questionsPage.getContent());
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", questionsPage.getTotalPages());
+        model.addAttribute("answers", answersPage.getContent());
+        model.addAttribute("questionsPage", questionsPage);
+        model.addAttribute("answersPage", answersPage);
         model.addAttribute("latestQuestions", questionService.getLatestQuestions());
         model.addAttribute("latestAnswers", answerService.getLatestAnswers());
+
+
+        ContorllerUtils.paging(model, questionsPage, "qPageNumbers");
+        ContorllerUtils.paging(model, answersPage, "aPageNumbers");
+
         return "admin/index";
     }
+
 
     @GetMapping("/contact")
     public String contactPage() {

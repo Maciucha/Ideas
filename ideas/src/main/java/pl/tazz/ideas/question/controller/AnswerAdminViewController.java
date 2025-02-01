@@ -44,11 +44,11 @@ public class AnswerAdminViewController {
             reverseSort = "asc";
         }
 
-        Page<Answer> answerPage = answerService.getPageableAnswers(search, pageable);
+        Page<Answer> answerPage = answerService.getAnswers(search, pageable);
         model.addAttribute("answerPage", answerPage);
         model.addAttribute("search", search);
         model.addAttribute("reverseSort", reverseSort);
-        ContorllerUtils.paging(model, answerPage);
+        ContorllerUtils.paging(model, answerPage, "answerPageNumbers");
 
         return "/admin/answer/index";
     }

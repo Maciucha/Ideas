@@ -34,7 +34,7 @@ public class SearchViewController extends IdeasCommonViewController {
             model.addAttribute("questionsPage", questionsPage);
             model.addAttribute("query", query);
 
-            ContorllerUtils.paging(model, questionsPage);
+            ContorllerUtils.paging(model, questionsPage, "questionsPageNumbers");
         }
 
         addGlobalAttributes(model);

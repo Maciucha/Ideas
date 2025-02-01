@@ -9,6 +9,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import pl.tazz.ideas.category.domain.model.Category;
 import pl.tazz.ideas.category.domain.repository.CategoryRepository;
+import pl.tazz.ideas.question.domain.model.Answer;
 import pl.tazz.ideas.question.domain.model.Question;
 import pl.tazz.ideas.question.domain.repository.AnswerRepository;
 import pl.tazz.ideas.question.domain.repository.QuestionRepository;
@@ -31,31 +32,32 @@ class QuestionServiceIT {
     private QuestionRepository questionRepository;
 
     @Autowired
-    private CategoryRepository categoryRepository;
-
-    @Autowired
     private AnswerRepository answerRepository;
 
-//    @Test
-//    void shouldGetAllQuestions() {
-//        // given
-//        questionRepository.deleteAll();
-//
-//        questionRepository.saveAll(List.of(
-//                new Question("Question1"),
-//                new Question("Question2"),
-//                new Question("Question3")
-//        ));
-//
-//        // when
-//        Page<Question> questions = questionService.getQuestions(search, Pageable.unpaged());
-//
-//        // then
-//        assertThat(questions)
-//                .hasSize(3)
-//                .extracting(Question::getName)
-//                .containsExactlyInAnyOrder("Question1", "Question2", "Question3");
-//    }
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Test
+    void shouldGetAllQuestions() {
+        // given
+        answerRepository.deleteAll();
+        questionRepository.deleteAll();
+
+        questionRepository.saveAll(List.of(
+                new Question("Question1"),
+                new Question("Question2"),
+                new Question("Question3")
+        ));
+
+        // when
+        Page<Question> questions = questionService.getQuestions("", Pageable.unpaged());
+
+        // then
+        assertThat(questions)
+                .hasSize(3)
+                .extracting(Question::getName)
+                .containsExactlyInAnyOrder("Question1", "Question2", "Question3");
+    }
 
     @Test
     void shouldSingleGetQuestion() {
@@ -85,7 +87,11 @@ class QuestionServiceIT {
 
         // then
         assertThat(result.getName()).isEqualTo(question.getName());
-        assertThat(result.getName()).isEqualTo(questionRepository.getById(result.getId()).getName());
+        assertThat(result.getName()).isEqualTo(
+                questionRepository.findById(result.getId())
+                        .map(Question::getName)
+                        .orElseThrow(() -> new AssertionError("Question not found in repository"))
+        );
     }
 
     @Test
@@ -101,8 +107,13 @@ class QuestionServiceIT {
 
         // then
         assertThat(result.getId()).isEqualTo(question.getId());
-        assertThat(result.getId()).isEqualTo(questionRepository.getById(question.getId()).getId());
+        assertThat(result.getId()).isEqualTo(
+                questionRepository.findById(question.getId())
+                        .map(Question::getId)
+                        .orElseThrow(() -> new AssertionError("Question not found in repository"))
+        );
     }
+
 
     @Test
     void shouldDeleteQuestion() {
@@ -143,55 +154,31 @@ class QuestionServiceIT {
                 .containsExactlyInAnyOrder("Question1", "Question2");
     }
 
-//    @Test
-//    void shouldFindHot() {
-//        // given
-//        questionRepository.deleteAll();
-//
-//        Question question1 = new Question("Question1");
-//        Question question2 = new Question("Question2");
-//        Question question3 = new Question("Question3");
-//
-//        questionRepository.saveAll(List.of(question1, question2, question3));
-//
-//        Answer answer = new Answer("Answer");
-//        question2.addAnswer(answer);
-//        answerRepository.save(answer);
-//
-//        // when
-//        Page<Question> result = questionService.findHot(Pageable.unpaged());
-//
-//        // then
-//        assertThat(result)
-//                .hasSize(3)
-//                .extracting(Question::getName)
-//                .containsExactlyInAnyOrder("Question2", "Question1", "Question3");
-//    }
+    @Test
+    void shouldFindHot() {
+        // given
+        questionRepository.deleteAll();
 
-//    @Test
-//    void shouldFindUnanswered() {
-//        // given
-//        questionRepository.deleteAll();
-//
-//        Question question1 = new Question("Question1");
-//        Question question2 = new Question("Question2");
-//        Question question3 = new Question("Question3");
-//
-//        questionRepository.saveAll(List.of(question1, question2, question3));
-//
-//        Answer answer = new Answer("Answer");
-//        question2.addAnswer(answer);
-//        answerRepository.save(answer);
-//
-//        // when
-//        Page<Question> result = questionService.findUnanswered(Pageable.unpaged());
-//
-//        // then
-//        assertThat(result)
-//                .hasSize(2)
-//                .extracting(Question::getName)
-//                .containsExactlyInAnyOrder("Question1", "Question3");
-//    }
+        Question question1 = new Question("Question1");
+        Question question2 = new Question("Question2");
+        Question question3 = new Question("Question3");
+
+        questionRepository.saveAll(List.of(question1, question2, question3));
+
+        Answer answer = new Answer("Answer", question2);
+        question2.addAnswer(answer);
+        answerRepository.save(answer);
+
+        // when
+        Page<Question> result = questionService.findHot(Pageable.unpaged());
+
+        // then
+        assertThat(result)
+                .hasSize(3)
+                .extracting(Question::getName)
+                .containsExactlyInAnyOrder("Question2", "Question1", "Question3");
+    }
+
 
     @Test
     void shouldFindByQuery() {

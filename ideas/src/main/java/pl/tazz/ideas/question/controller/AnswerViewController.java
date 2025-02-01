@@ -41,7 +41,7 @@ public class AnswerViewController extends IdeasCommonViewController {
         Page<Question> questionsPage = questionService.getQuestions(search, pageRequest);
 
         model.addAttribute("questionsPage", questionsPage);
-        ContorllerUtils.paging(model, questionsPage);
+        ContorllerUtils.paging(model, questionsPage, "questionsPageNumbers");
         addGlobalAttributes(model);
 
         return "user/answer/index";

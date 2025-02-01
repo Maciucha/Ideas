@@ -46,4 +46,11 @@ public class Answer {
         this.username = username;
         this.email = email;
     }
+
+    public Answer(String content, Question question) {
+        this();
+        this.content = content;
+        this.question = question;
+    }
+
 }

@@ -48,7 +48,7 @@ public class QuestionAdminViewController {
         model.addAttribute("questionsPage", questionsPagePage);
         model.addAttribute("search", search);
         model.addAttribute("reverseSort", reverseSort);
-        ContorllerUtils.paging(model, questionsPagePage);
+        ContorllerUtils.paging(model, questionsPagePage, "questionsPageNumbers");
 
         return "/admin/question/index";
     }
