@@ -22,6 +22,12 @@
                                     <br>
 
                             <table>
+                                <tr>
+                                    <th style="width: 50px;">Nr</th>
+                                    <th><a th:class="'sort-'+${reverseSort}"
+                                           th:href="@{'/admin'(s=${search}, field='name', direction=${reverseSort})}" th:text="#{menu.name}">Name</a></th>
+                                    <th th:text="#{text.action}">Action</th>
+                                </tr>
                                 <tbody>
                                     <tr th:each="question, it : ${questions}">
                                         <td th:text="${it.index}+1"></td>
@@ -69,6 +75,12 @@
                                         <br>
 
                                     <table>
+                                    <tr>
+                                        <th style="width: 50px;">Nr</th>
+                                        <th><a th:class="'sort-'+${reverseSort}"
+                                               th:href="@{'/admin'(s=${search}, field='name', direction=${reverseSort})}" th:text="#{menu.name}">Name</a></th>
+                                        <th th:text="#{text.action}">Action</th>
+                                    </tr>
                                         <tbody>
                                         <tr th:each="answer, it : ${answers}">
                                             <td th:text="${it.index + 1}"></td>

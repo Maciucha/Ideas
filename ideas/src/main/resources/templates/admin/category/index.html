@@ -68,8 +68,8 @@
                                     <tr>
                                         <th>Nr</th>
                                         <th><a th:class="'sort-'+${reverseSort}"
-                                                th:href="@{'/admin/categories'(s=${search}, field='name', direction=${reverseSort})}">Name</a></th>
-                                        <th>Action</th>
+                                                th:href="@{'/admin/categories'(s=${search}, field='name', direction=${reverseSort})}" th:text="#{menu.name}">Name</a></th>
+                                        <th th:text="#{text.action}">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -98,7 +98,7 @@
                                 </table>
 
                                 <div class="card-footer clearfix">
-                                    <ul class="pagination pagination-sm m-0 justify-content-center d-flex" th:if="${categoriesPage.totalPages > 0}">
+                                    <ul class="pagination pagination-sm m-0 justify-content-left d-flex" th:if="${categoriesPage.totalPages > 0}">
                                         <li th:each="pageNumber : ${pageNumbers}" class="page-item">
                                             <a class="page-link"
                                                th:href="@{'/admin/categories'(s=${search}, field=${field}, direction=${direction}, size=${categoriesPage.size}, page=${pageNumber - 1})}"
